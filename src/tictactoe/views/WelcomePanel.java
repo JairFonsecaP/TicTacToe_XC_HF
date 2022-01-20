@@ -5,8 +5,11 @@ import utility.PanelHelper;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class WelcomePanel extends JPanel implements IWelcomeListener {
+
+
     private final JTextField player1JTextField;
     private final JTextField player2JTextField;
     private final JButton btnExit;
@@ -94,5 +97,21 @@ public class WelcomePanel extends JPanel implements IWelcomeListener {
         if (name == null)
             throw new IllegalArgumentException("Name must not be null");
         this.player2JTextField.setText(name);
+    }
+
+    public void addExitListener(ActionListener listener){
+
+        btnExit.addActionListener(listener);
+    }
+    public void addPlayListener(ActionListener listener){
+        btnPlay.addActionListener(listener);
+    }
+
+    public String getPlayer1JTextField() {
+        return player1JTextField.getText();
+    }
+
+    public String getPlayer2JTextField() {
+        return player2JTextField.getText();
     }
 }
