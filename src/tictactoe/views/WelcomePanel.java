@@ -12,14 +12,18 @@ public class WelcomePanel extends JPanel implements IWelcomeListener {
 
     private final JTextField player1JTextField;
     private final JTextField player2JTextField;
+    private final JComboBox boardSizeList;
+    String[] boardSizes = {"3x3", "4x4", "5x5"};
     private final JButton btnExit;
     private final JButton btnPlay;
     public WelcomePanel (){
 
         player1JTextField = createPlayerJTextField();
         player2JTextField = createPlayerJTextField();
+        boardSizeList = new JComboBox(boardSizes);
         btnExit = new JButton("Exit");
         btnPlay = new JButton("Play");
+
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(PanelHelper.createLargeEmptyBorder());
@@ -30,8 +34,19 @@ public class WelcomePanel extends JPanel implements IWelcomeListener {
         add(PanelHelper.createSmallSeparator());
         add(createPlayer2Panel());
         add(PanelHelper.createSmallSeparator());
+        add(createSelectBoardSizePanel());
+        add(PanelHelper.createSmallSeparator());
         add(createButtonPanel());
 
+    }
+
+    private JPanel createSelectBoardSizePanel() {
+        JPanel boardSizePanel = new JPanel();
+        boardSizePanel.setLayout(new BoxLayout(boardSizePanel, BoxLayout.X_AXIS));
+        boardSizePanel.add(new JLabel("Board size: "));
+        boardSizePanel.add(PanelHelper.createSmallSeparator());
+        boardSizePanel.add(boardSizeList);
+        return boardSizePanel;
     }
 
     private JPanel createButtonPanel() {

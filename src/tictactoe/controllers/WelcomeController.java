@@ -27,7 +27,7 @@ public class WelcomeController {
     private void onPlayClicked() {
         if(playersNamesAreValid()){
             //TODO
-            //Set names por players
+            //Set names for players
             //Open new window
             //Close actual window
         }else{
