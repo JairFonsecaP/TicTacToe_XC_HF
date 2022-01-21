@@ -24,7 +24,7 @@ public class Welcome {
         return player2;
     }
 
-    public void setPlayer1(String name){
+    public void setPlayer1Name(String name){
         if (name == null)
             throw new IllegalArgumentException("Name must not be null");
         this.player1.setName(name);
