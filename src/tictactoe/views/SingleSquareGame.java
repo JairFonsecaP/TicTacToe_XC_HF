@@ -10,7 +10,7 @@ public class SingleSquareGame extends JButton {
     private int state;
     public SingleSquareGame(){
         state = empty;
-        Dimension dimension = new Dimension(30,30);
+        Dimension dimension = new Dimension(50,50);
         setSize(dimension);
     }
 
