@@ -129,4 +129,13 @@ public class WelcomePanel extends JPanel implements IWelcomeListener {
     public String getPlayer2JTextField() {
         return player2JTextField.getText();
     }
+    public int getBoardSize(){
+        switch (boardSizeList.getSelectedIndex()){
+            case 0: return 3;
+            case 1: return 4;
+            case 2: return 5;
+            default: return 0;
+        }
+
+    }
 }

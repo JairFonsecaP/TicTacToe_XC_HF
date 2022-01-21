@@ -1,7 +1,11 @@
 package tictactoe.controllers;
 
+import tictactoe.models.Player;
 import tictactoe.models.Welcome;
+import tictactoe.views.GamePanel;
+import tictactoe.views.GameWindow;
 import tictactoe.views.WelcomePanel;
+import tictactoe.views.Window;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,7 +20,7 @@ public class WelcomeController {
         this.welcome = welcome;
         this.view = view;
 
-        initializeView(welcome, view);
+        initializeView(view);
 
         welcome.addListener(view);
 
@@ -26,10 +30,18 @@ public class WelcomeController {
 
     private void onPlayClicked() {
         if(playersNamesAreValid()){
-            //TODO
-            //Set names for players
+
+            //Set players
+            Player player1 = new Player(view.getPlayer1JTextField(),0,0);
+            Player player2 = new Player(view.getPlayer2JTextField(),0,0);
+
             //Open new window
+            GamePanel panel = new GamePanel(view.getBoardSize(), player1, player2);
+            GameWindow window = new GameWindow("Tic Tac Toe Game", panel);
+            window.setVisible(true);
+
             //Close actual window
+            view.getParent().setVisible(false);
         }else{
             JOptionPane.showMessageDialog( view.getParent(),"Error: Players names are invalid","Tic Tac Toe Game",
                     JOptionPane.ERROR_MESSAGE);
@@ -37,7 +49,9 @@ public class WelcomeController {
     }
 
     private boolean playersNamesAreValid() {
-        return view.getPlayer1JTextField().length() >=1 && view.getPlayer2JTextField().length() >=1;
+        return view.getPlayer1JTextField().length() >=1
+                && view.getPlayer2JTextField().length() >=1
+                && !view.getPlayer2JTextField().equals(view.getPlayer1JTextField());
     }
 
     private void onExitClicked() {
@@ -46,7 +60,7 @@ public class WelcomeController {
             System.exit(0);
     }
 
-    private void initializeView(Welcome welcome, WelcomePanel view) {
+    private void initializeView(WelcomePanel view) {
         view.player1NameChanged("");
         view.player2NameChanged("");
     }

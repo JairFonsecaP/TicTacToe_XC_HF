@@ -2,6 +2,9 @@ package tictactoe.models;
 
 public class Player {
     private static long nextPlayerNumber = 1000001;
+
+
+
     private final long playerNumber;
     String name;
     int numberOfGames;
@@ -31,11 +34,25 @@ public class Player {
             this.name = name;
     }
     public void setNumberOfGames(int numberOfGames) {
-        if (isNumberOfGamesValid(numberOfGames))
-            this.numberOfGames = numberOfGames;
-        throw new IllegalArgumentException("Number of Games invalid");
+        if (!isNumberOfGamesValid(numberOfGames))
+            throw new IllegalArgumentException("Number of Games invalid");
+        this.numberOfGames = numberOfGames;
     }
     private boolean isNumberOfGamesValid(int numberOfGames) {
         return numberOfGames >= 0;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public int getNumberOfGames() {
+        return numberOfGames;
+    }
+
+    public int getScore() {
+        return score;
+    }
+    public long getPlayerNumber() {
+        return playerNumber;
     }
 }
