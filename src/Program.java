@@ -12,11 +12,11 @@ public class Program {
         Welcome welcome = new Welcome();
         //View
         WelcomePanel panel = new WelcomePanel();
-        GamePanel gamePanel = new GamePanel(3);
+        //SGamePanel gamePanel = new GamePanel(3);
         //Controller
         WelcomeController controller = new WelcomeController(welcome, panel);
 
-        Window window = new Window("Welcome!", gamePanel);
+        Window window = new Window("Welcome!", panel);
         window.setVisible(true);
     }
 
