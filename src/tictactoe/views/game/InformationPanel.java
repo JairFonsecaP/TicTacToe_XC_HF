@@ -1,4 +1,4 @@
-package tictactoe.views;
+package tictactoe.views.game;
 
 import utility.PanelHelper;
 

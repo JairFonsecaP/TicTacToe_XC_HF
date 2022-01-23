@@ -1,11 +1,9 @@
-package tictactoe.views;
+package tictactoe.views.game;
 
 import tictactoe.models.Player;
 import utility.PanelHelper;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
     private final Player player1;
