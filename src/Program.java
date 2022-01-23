@@ -13,8 +13,7 @@ public class Program {
         //SGamePanel gamePanel = new GamePanel(3);
         Window window = new Window("Welcome!", panel);
         //Controller
-        WelcomeController controller = new WelcomeController(welcome, panel,window);
-
+        WelcomeController controller = new WelcomeController(welcome, panel, window);
 
         window.setVisible(true);
     }

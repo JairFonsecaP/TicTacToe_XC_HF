@@ -43,9 +43,7 @@ public class WelcomeController {
             window.setVisible(true);
 
             //Close actual window
-
             //view.getParent().setVisible(false);
-
             /*
             Line for closing the welcome window
              */
