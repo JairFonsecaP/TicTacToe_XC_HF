@@ -1,6 +1,7 @@
 package tictactoe.models;
 
-public class Player {
+public class
+Player {
     private static long nextPlayerNumber = 1000001;
 
 
