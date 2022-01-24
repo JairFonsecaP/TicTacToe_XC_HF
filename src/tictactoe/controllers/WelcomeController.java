@@ -30,7 +30,7 @@ public class WelcomeController {
 
     private void onPlayClicked() {
         if(playersNamesAreValid()){
-
+            //TODO extract function
             //Set players
             Player player1 = new Player(view.getPlayer1JTextField(),0,0);
             Player player2 = new Player(view.getPlayer2JTextField(),0,0);
@@ -39,7 +39,7 @@ public class WelcomeController {
             GamePanel panel = new GamePanel(view.getBoardSize(), player1, player2);
             GameWindow window = new GameWindow("Tic Tac Toe Game", panel);
             window.setVisible(true);
-
+            //TODO pasar por parametro el window y ocultarlo.
             //Close actual window
             view.getParent().setVisible(false);
         }else{

@@ -12,6 +12,7 @@ public class SingleSquareGame extends JButton {
         state = empty;
         Dimension dimension = new Dimension(50,50);
         setSize(dimension);
+        setText("      ");
     }
 
     public int getState(){

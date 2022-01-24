@@ -1,5 +1,6 @@
 package tictactoe.views;
 
+import tictactoe.models.Player;
 import utility.PanelHelper;
 
 import javax.swing.*;
@@ -10,8 +11,12 @@ import java.time.format.DateTimeFormatter;
 public class InformationPanel extends JPanel
 {
     private final JLabel roundLabel;
-    public InformationPanel()
+    private final Player player1;
+    private final Player player2;
+    public InformationPanel(Player player1, Player player2)
     {
+        this.player1 = player1;
+        this.player2 = player2;
         roundLabel = new JLabel("ROUND X");
         add(createUpperPanel());
     }
@@ -29,8 +34,8 @@ public class InformationPanel extends JPanel
         setLayout(new GridLayout(2,1));
         upperPanel.add(dateLabel);
 
-        JLabel playerXLabel = new JLabel("Ximena");
-        JLabel playerYLabel = new JLabel("Jair");
+        JLabel playerXLabel = new JLabel(player1.getName());
+        JLabel playerYLabel = new JLabel(player2.getName());
 
         lowerPanel.add(playerXLabel);
         lowerPanel.add(playerYLabel);

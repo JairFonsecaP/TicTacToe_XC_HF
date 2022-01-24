@@ -18,7 +18,7 @@ public class GamePanel extends JPanel {
         this.player1 = player1;
         this.player2 = player2;
         gameZonePanel = new GameZonePanel(sizeSide);
-        informationPanel = new InformationPanel();
+        informationPanel = new InformationPanel(player1, player2);
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         setBorder(PanelHelper.createLargeEmptyBorder());
         add(informationPanel);
