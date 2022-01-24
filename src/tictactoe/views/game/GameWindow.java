@@ -1,4 +1,4 @@
-package tictactoe.views;
+package tictactoe.views.game;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +10,7 @@ public class GameWindow extends JFrame {
         setContentPane(contentPane);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setResizable(false);
         pack();
     }
 }

@@ -2,10 +2,10 @@ package tictactoe.controllers;
 
 import tictactoe.models.Player;
 import tictactoe.models.Welcome;
-import tictactoe.views.GamePanel;
-import tictactoe.views.GameWindow;
-import tictactoe.views.WelcomePanel;
 import tictactoe.views.Window;
+import tictactoe.views.game.GamePanel;
+import tictactoe.views.game.GameWindow;
+import tictactoe.views.WelcomePanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,11 +14,13 @@ import java.awt.event.ActionEvent;
 public class WelcomeController {
     private final Welcome welcome;//Model
     private final WelcomePanel view;
+    private final Window windowWelcome;
 
-    public WelcomeController(Welcome welcome, WelcomePanel view){
+    public WelcomeController(Welcome welcome, WelcomePanel view, Window window){
 
         this.welcome = welcome;
         this.view = view;
+        this.windowWelcome = window;
 
         initializeView(view);
 
@@ -41,7 +43,11 @@ public class WelcomeController {
             window.setVisible(true);
             //TODO pasar por parametro el window y ocultarlo.
             //Close actual window
-            view.getParent().setVisible(false);
+            //view.getParent().setVisible(false);
+            /*
+            Line for closing the welcome window
+             */
+            windowWelcome.dispose();
         }else{
             JOptionPane.showMessageDialog( view.getParent(),"Error: Players names are invalid","Tic Tac Toe Game",
                     JOptionPane.ERROR_MESSAGE);
