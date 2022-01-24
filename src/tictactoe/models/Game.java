@@ -1,5 +1,9 @@
 package tictactoe.models;
 
+import tictactoe.interfaces.IGameListener;
+
+import java.util.ArrayList;
+
 public class Game
 {
     private static int nextId = 1;
@@ -13,6 +17,8 @@ public class Game
     private int scorePlayer2;
     private int round;
 
+    private transient ArrayList<IGameListener> listeners;
+
 
     public Game(String player1, String player2)
     {
@@ -23,6 +29,7 @@ public class Game
         this.scorePlayer2 = 0;
         this.round = 1;
         turn = new Turn();
+        listeners = new ArrayList<>();
     }
 
     private Player createPlayer(String playerName) {
@@ -55,4 +62,11 @@ public class Game
     public int getRound() {
         return round;
     }
+    public void addListener(IGameListener listener){
+        listeners.add(listener);
+    }
+    public void removeListener(IGameListener listener){
+        listeners.remove(listener);
+    }
+
 }
