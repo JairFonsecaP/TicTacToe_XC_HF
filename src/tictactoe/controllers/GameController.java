@@ -4,6 +4,7 @@ import tictactoe.models.Game;
 import tictactoe.views.game.GamePanel;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class GameController {
 
@@ -18,6 +19,7 @@ public class GameController {
         view.getGameZonePanel().addButtonsListener((ActionEvent e) -> onButtonClicked(e));
 
     }
+
 
     private void onButtonClicked(ActionEvent e) {
         view.getGameZonePanel().buttonClicked(e.getSource());

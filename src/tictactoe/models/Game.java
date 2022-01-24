@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 public class Game
 {
+
+    private static final int PlayerX = 1;
+    private static final int PlayerY = 10;
     private static int nextId = 1;
     private final int id;
     private final Turn turn;
@@ -13,9 +16,11 @@ public class Game
 
     private final Player player1;
     private final Player player2;
-    private int scorePlayer1;
-    private int scorePlayer2;
-    private int round;
+    private final int scorePlayer1;
+    private final int scorePlayer2;
+    private final int round;
+    private final int sideSize;
+    private final ArrayList<ArrayList> rows;
 
     private transient ArrayList<IGameListener> listeners;
 
@@ -29,7 +34,90 @@ public class Game
         this.scorePlayer2 = 0;
         this.round = 1;
         turn = new Turn();
+        //TODO: toca cambialo para que este objeto tenga la informacion y los demas la consumande aca.
+        sideSize = 3;
+
+        rows = createRows(sideSize);
         listeners = new ArrayList<>();
+    }
+
+    private static final ArrayList createRows(int sizeSide)
+    {
+        ArrayList<ArrayList> toReturn = new ArrayList<>();
+        for (int i = 0; i < sizeSide; i++)
+        {
+            ArrayList<Integer> row = new ArrayList<>();
+            for (int j = 0; j < sizeSide; j++)
+            {
+                row.add(0);
+            }
+            toReturn.add(row);
+
+        }
+        return toReturn;
+    }
+
+    public boolean isThereWinner()
+    {
+        return validateRows() || validateColumns() || validateDiagonal();
+    }
+    
+    private boolean validateRows()
+    {
+        for (int i = 0; i < sideSize;i++)
+        {
+            int counter = 0;
+            for (int j = 0; j < sideSize; j++)
+                counter += (Integer)rows.get(i).get(j);
+
+            if (counter == 3 || counter == 30)
+                return true;
+        }
+        return false;
+    }
+
+    private boolean validateColumns()
+    {
+        for (int i = 0; i < sideSize; i++)
+        {
+            int counter = 0;
+            for (int j = 0; j < sideSize; j++)
+                counter += (Integer) rows.get(j).get(i);
+
+            if (counter == 3 || counter == 30)
+                return true;
+        }
+        return false;
+    }
+
+    private boolean validateDiagonal()
+    {
+        return validateDiagonal(rows) || validateDiagonal(transposeMatrix());
+    }
+
+    private ArrayList<ArrayList> transposeMatrix()
+    {
+        ArrayList<ArrayList> matrix = new ArrayList<>();
+        for (int i = 0; i < sideSize; i++)
+        {
+            ArrayList<Integer> row = new ArrayList<>();
+            for (int j = sideSize - 1; j >= 0; j++)
+            {
+                row.add((Integer) rows.get(i).get(j));
+            }
+            matrix.add(row);
+        }
+        return matrix;
+    }
+
+    private boolean validateDiagonal(ArrayList<ArrayList> matrix)
+    {
+        int counter = 0;
+        for (int i = 0; i < sideSize; i++)
+        {
+            counter += (Integer) matrix.get(i).get(i);
+        }
+        return counter == 3 || counter == 30;
     }
 
     private Player createPlayer(String playerName) {
@@ -39,7 +127,6 @@ public class Game
         else
             return player;
     }
-
     public Player getPlayer1() {
         return player1;
     }
