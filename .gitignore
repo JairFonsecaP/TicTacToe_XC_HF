@@ -117,6 +117,7 @@ fabric.properties
 
 # Log file
 *.log
+*.data
 
 # BlueJ files
 *.ctxt

@@ -37,7 +37,19 @@ public class WelcomePanel extends JPanel implements IWelcomeListener {
         add(createSelectBoardSizePanel());
         add(PanelHelper.createSmallSeparator());
         add(createButtonPanel());
+        add(PanelHelper.createLargeSeparator());
+        add(createHistoryLinkPanel());
 
+    }
+
+    private JPanel createHistoryLinkPanel() {
+        JPanel historyPanel = new JPanel();
+        historyPanel.setLayout(new BoxLayout(historyPanel, BoxLayout.X_AXIS));
+        JLabel historyLabel = new JLabel("History");
+        historyLabel.setForeground(Color.BLUE.darker());
+        historyLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        historyPanel.add(historyLabel);
+        return historyPanel;
     }
 
     private JPanel createSelectBoardSizePanel() {

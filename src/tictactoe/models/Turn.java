@@ -1,11 +1,13 @@
 package tictactoe.models;
 
+import tictactoe.PlayerType;
+
 import java.util.Random;
 
 public class Turn
 {
     private boolean turn;
-    private enum players{ X, O};
+    private PlayerType playerType;
     private static final Random random;
 
     static
@@ -23,9 +25,9 @@ public class Turn
         return random.nextBoolean();
     }
 
-    public players getTurnPlayer()
+    public PlayerType getTurnPlayer()
     {
-        return turn ? players.X : players.O;
+        return turn ? PlayerType.X : PlayerType.O;
     }
 
     public void changeTurn()

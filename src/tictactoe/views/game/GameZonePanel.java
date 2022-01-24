@@ -1,16 +1,23 @@
 package tictactoe.views.game;
 
-import tictactoe.views.game.SingleSquareGame;
+import tictactoe.PlayerType;
+import tictactoe.interfaces.IGameListener;
+import tictactoe.models.Game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class GameZonePanel extends JPanel {
+public class GameZonePanel extends JPanel  implements IGameListener {
+    private final static char xPlayerCharacter = 'X';
+    private final static char oPlayerCharacter = 'O';
     private final ArrayList<ArrayList> rows;
     private final int size;
+    private Game game;
 
-    public GameZonePanel(int sizeSide){
+    public GameZonePanel(int sizeSide, Game game){
+        this.game = game;
         size = sizeSide * sizeSide;
         rows = new ArrayList<>();
         for (int i = 0; i < sizeSide; i++)
@@ -43,5 +50,29 @@ public class GameZonePanel extends JPanel {
             row.add(field);
         }
         return row;
+    }
+
+    public void addButtonsListener(ActionListener listener){
+
+        for (ArrayList row: rows) {
+            for (Object list: row ) {
+                SingleSquareGame button = (SingleSquareGame) list;
+                button.addActionListener(listener);
+            }
+        }
+    }
+
+
+    @Override
+    public void buttonClicked(Object buttonClicked) {
+        JButton button = (JButton) buttonClicked;
+
+        if (game.getTurn().getTurnPlayer() == PlayerType.X )
+            button.setText(String.valueOf(xPlayerCharacter));
+        else
+            button.setText(String.valueOf(oPlayerCharacter));
+
+        button.setEnabled(false);
+        game.getTurn().changeTurn();
     }
 }
