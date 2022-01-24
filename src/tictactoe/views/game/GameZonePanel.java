@@ -1,5 +1,7 @@
 package tictactoe.views.game;
 
+import tictactoe.views.SingleSquareGame;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
