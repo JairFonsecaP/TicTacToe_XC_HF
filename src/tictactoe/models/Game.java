@@ -70,7 +70,7 @@ public class Game
             for (int j = 0; j < sideSize; j++)
                 counter += (Integer)rows.get(i).get(j);
 
-            if (counter == 3 || counter == 30)
+            if (counter == PlayerX * sideSize || counter == PlayerY * sideSize)
                 return true;
         }
         return false;
@@ -84,7 +84,7 @@ public class Game
             for (int j = 0; j < sideSize; j++)
                 counter += (Integer) rows.get(j).get(i);
 
-            if (counter == 3 || counter == 30)
+            if (counter == PlayerX * sideSize || counter == PlayerY * sideSize)
                 return true;
         }
         return false;
@@ -117,7 +117,7 @@ public class Game
         {
             counter += (Integer) matrix.get(i).get(i);
         }
-        return counter == 3 || counter == 30;
+        return counter == PlayerX * sideSize || counter == PlayerY * sideSize;
     }
 
     private Player createPlayer(String playerName) {
