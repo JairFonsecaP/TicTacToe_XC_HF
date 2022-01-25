@@ -65,7 +65,10 @@ public class GameZonePanel extends JPanel  implements IGameListener {
 
     @Override
     public void buttonClicked(Object buttonClicked) {
-        JButton button = (JButton) buttonClicked;
+        SingleSquareGame button = (SingleSquareGame) buttonClicked;
+
+//TODO: implementar el cambio en el modelo
+//TODO: cambiar este metodo al controlador
 
         if (game.getTurn().getTurnPlayer() == PlayerType.X )
             button.setText(String.valueOf(xPlayerCharacter));
