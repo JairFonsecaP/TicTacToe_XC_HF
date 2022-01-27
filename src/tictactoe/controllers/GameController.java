@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 public class GameController {
-
+//
     private final GamePanel view;
     private final Game model;
 
