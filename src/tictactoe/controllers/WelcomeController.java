@@ -15,13 +15,15 @@ import java.awt.event.ActionEvent;
 public class WelcomeController {
     private final Welcome welcome;//Model
     private final WelcomePanel view;
-    private final Window windowWelcome;
+    private final ProgramController programController;
 
-    public WelcomeController(Welcome welcome, WelcomePanel view, Window window){
+
+    public WelcomeController(Welcome welcome, WelcomePanel view, ProgramController programController){
 
         this.welcome = welcome;
         this.view = view;
-        this.windowWelcome = window;
+        this.programController = programController;
+
 
         initializeView(view);
 
@@ -33,10 +35,8 @@ public class WelcomeController {
 
     private void onPlayClicked() {
         if(playersNamesAreValid()){
-            GamePanel panel = new GamePanel(view.getBoardSize(), view.getPlayer1JTextField(), view.getPlayer2JTextField());
-            GameWindow window = new GameWindow("Tic Tac Toe Game", panel);
-            window.setVisible(true);
-            windowWelcome.dispose();
+            programController.closeWelcomeWindow();
+            ProgramController.playGame(view.getBoardSize(),view.getPlayer1JTextField(), view.getPlayer2JTextField());
         }else{
             JOptionPane.showMessageDialog( view.getParent(),"Error: Players names are invalid","Tic Tac Toe Game",
                     JOptionPane.ERROR_MESSAGE);

@@ -1,6 +1,5 @@
 package tictactoe.models;
 
-import tictactoe.PlayerType;
 import java.util.Random;
 
 public class Turn
