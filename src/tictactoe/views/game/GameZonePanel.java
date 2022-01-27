@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class GameZonePanel extends JPanel  implements IGameListener {
     private final static char xPlayerCharacter = 'X';
     private final static char oPlayerCharacter = 'O';
-    private final ArrayList<ArrayList> rows;
+    private final ArrayList<ArrayList<SingleSquareGame>> rows;
     private final int size;
     private Game game;
 

@@ -1,5 +1,6 @@
 package tictactoe.models;
 
+import tictactoe.PlayerType;
 import tictactoe.interfaces.IGameListener;
 
 import java.util.ArrayList;
@@ -155,5 +156,19 @@ public class Game
     public void removeListener(IGameListener listener){
         listeners.remove(listener);
     }
+
+    public void setAPosition(ArrayList<Integer> position)
+    {
+        rows.get(position.get(0)).set(position.get(1), turn.getTurnPlayer() == PlayerType.X ? PlayerX : PlayerY);
+        for (IGameListener listener : listeners)
+        {
+            listener.buttonClicked(null);
+        }
+    }
+
+    /*private boolean canPlay()
+    {
+        return rows.
+    }*/
 
 }

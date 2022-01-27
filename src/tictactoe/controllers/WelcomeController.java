@@ -33,7 +33,6 @@ public class WelcomeController {
 
     private void onPlayClicked() {
         if(playersNamesAreValid()){
-
             GamePanel panel = new GamePanel(view.getBoardSize(), view.getPlayer1JTextField(), view.getPlayer2JTextField());
             GameWindow window = new GameWindow("Tic Tac Toe Game", panel);
             window.setVisible(true);

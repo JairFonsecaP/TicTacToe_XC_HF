@@ -22,6 +22,7 @@ public class GamePanel extends JPanel  {
         setBorder(PanelHelper.createLargeEmptyBorder());
         add(informationPanel);
         add(gameZonePanel);
+        //TODO: el controlador no se puede crear aca
         GameController controller = new GameController(this,game);
     }
     public Game getGame() {

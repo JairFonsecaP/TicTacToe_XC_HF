@@ -11,7 +11,8 @@ public class GameController {
     private final GamePanel view;
     private final Game model;
 
-    public GameController(GamePanel view, Game model ){
+    public GameController(GamePanel view, Game model )
+    {
         this.view = view;
         this.model = model;
         model.addListener(view.getGameZonePanel());
@@ -21,7 +22,9 @@ public class GameController {
     }
 
 
-    private void onButtonClicked(ActionEvent e) {
+    private void onButtonClicked(ActionEvent e)
+    {
+
         view.getGameZonePanel().buttonClicked(e.getSource());
     }
 }
