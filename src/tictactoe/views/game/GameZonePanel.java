@@ -2,13 +2,14 @@ package tictactoe.views.game;
 
 import tictactoe.interfaces.IGameListener;
 import tictactoe.models.Game;
+import tictactoe.models.PlayerType;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class GameZonePanel extends JPanel  {
+public class GameZonePanel extends JPanel implements IGameListener {
 
     private final ArrayList<ArrayList<SingleSquareGame>> matrix;
     private final int size;
@@ -63,5 +64,13 @@ public class GameZonePanel extends JPanel  {
     public ArrayList<ArrayList<SingleSquareGame>> getMatrix()
     {
         return matrix;
+    }
+
+    @Override
+    public void buttonClicked(int x,int y) {
+        SingleSquareGame button = matrix.get(x).get(y);
+        PlayerType playerType = game.getTurn().getTurnPlayer();
+        button.setText(String.valueOf(playerType.getPlayerTypeStatChar()));
+        button.setEnabled(false);
     }
 }
