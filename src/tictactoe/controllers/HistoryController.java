@@ -1,14 +1,10 @@
 package tictactoe.controllers;
 
-import tictactoe.models.Game;
 import tictactoe.models.Player;
-import tictactoe.models.Welcome;
 import tictactoe.views.history.HistoryInformationPanel;
-import tictactoe.views.history.HistoryPanel;
 import tictactoe.views.history.HistoryWindow;
-import tictactoe.views.welcome.WelcomePanel;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
 public class HistoryController {
     private final HistoryInformationPanel view;
@@ -18,9 +14,7 @@ public class HistoryController {
     public HistoryController(HistoryWindow historyWindow , HistoryInformationPanel view){
         this.view = view;
         this.historyWindow = historyWindow;
+        view.players = Player.getPlayers();
+    }
 
-    }
-    public static ArrayList<Player> getHistory() {
-        return null;
-    }
 }

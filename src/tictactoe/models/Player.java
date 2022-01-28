@@ -1,11 +1,17 @@
 package tictactoe.models;
 
 import tictactoe.logs.PlayerObjectLogger;
-import java.io.Serializable;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Player implements Serializable {
     private static transient long nextPlayerNumber = 1000001;
     private static transient PlayerObjectLogger playerObjectLogger;
+    private static transient History history;
+    private static transient ArrayList<Player> players;
+    private static transient long finalId;
     private final PlayerType playerType;
     private final long playerNumber;
     private String name;
@@ -14,23 +20,56 @@ public class Player implements Serializable {
     private int numberOfGamesLost;
     private int numberOfGamesDrew;
 
-    public Player(String name,PlayerType playerType, int numberOfGames, int numberOfGamesWon, int numberOfGamesLost, int numberOfGamesDrew){
-        playerNumber = nextPlayerNumber++;
+    public Player(String name,PlayerType playerType){
+
+        finalId = nextPlayerNumber;
+        getHistory();
+
+
+        if (players.size() != 0) {
+            Player existing  = getPlayerByName(name);
+            if ( existing != null) {
+                this.equals(existing);
+                finalId = existing.getPlayerNumber();
+            }else{
+                nextPlayerNumber = getMaximumId() + 1;
+                finalId = nextPlayerNumber;
+            }
+        }else{
+            finalId = nextPlayerNumber++;
+        }
+
+        setNewPlayer(name);
+        playerNumber = finalId;
         this.playerType = playerType;
-        setName(name);
-        setNumberOfGames(numberOfGames);
-        setNumberOfGamesWon(numberOfGamesWon);
-        setNumberOfGamesLost(numberOfGamesLost);
-        setNumberOfGamesDrew(numberOfGamesDrew);
+
         playerObjectLogger = new PlayerObjectLogger(this);
         playerObjectLogger.writePlayerLog();
+
     }
 
-
-
-    private boolean isScoreValid(int score) {
-        return score >= 0;
+    public static void getHistory() {
+        History history = new History();
+        players = history.getPlayers();
     }
+
+    private void setNewPlayer(String name) {
+
+        setName(name);
+        setNumberOfGames(0);
+        setNumberOfGamesWon(0);
+        setNumberOfGamesLost(0);
+        setNumberOfGamesDrew(0);
+    }
+
+    private long getMaximumId() {
+        ArrayList<Long> ids = new ArrayList<>();
+        for (Player player: players) {
+            ids.add(player.getPlayerNumber());
+        }
+        return  Collections.max(ids);
+    }
+
 
     public void setName(String name) {
         if (name == null)
@@ -72,6 +111,17 @@ public class Player implements Serializable {
     public long getPlayerNumber() {
         return playerNumber;
     }
+    public int getNumberOfGamesWon() {
+        return numberOfGamesWon;
+    }
+
+    public int getNumberOfGamesLost() {
+        return numberOfGamesLost;
+    }
+
+    public int getNumberOfGamesDrew() {
+        return numberOfGamesDrew;
+    }
 
     public static Player getExistingPlayer(String name){
         PlayerObjectLogger playerObjectLogger = new PlayerObjectLogger();
@@ -79,4 +129,21 @@ public class Player implements Serializable {
             return playerObjectLogger.getPlayerObject(name);
         return null;
     }
+
+
+    private static Player getPlayerByName(String name){
+        for (Player player: players) {
+            if (player.getName().equals(name))
+                return player;
+        }
+        return null;
+    }
+
+    public static ArrayList<Player> getPlayers(){
+        return players;
+    }
+
+
+
+
 }

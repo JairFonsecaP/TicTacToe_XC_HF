@@ -12,6 +12,7 @@ public class HistoryWindow extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
+        setFont(new Font("Verdana", Font.PLAIN, 12));
         pack();
     }
 }

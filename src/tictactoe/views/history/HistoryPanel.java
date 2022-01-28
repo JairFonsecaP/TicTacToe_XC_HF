@@ -9,16 +9,18 @@ import utility.PanelHelper;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class HistoryPanel extends JPanel {
 
 
     public HistoryInformationPanel historyInformation;
     public HistoryController controller;
-    public HistoryPanel(){
+    public HistoryPanel()throws IOException, ClassNotFoundException{
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(PanelHelper.createLargeEmptyBorder());
+
 
         historyInformation = new HistoryInformationPanel();
 

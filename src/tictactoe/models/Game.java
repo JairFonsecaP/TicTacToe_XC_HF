@@ -26,8 +26,8 @@ public class Game {
     private final Player playerY;
 
     public Game(int size, String namePlayerX, String namePlayerY) {
-        playerX = new Player(namePlayerX, PlayerType.X, 0, 0, 0, 0);
-        playerY = new Player(namePlayerY, PlayerType.O, 0, 0, 0, 0);
+        playerX = new Player(namePlayerX, PlayerType.X);
+        playerY = new Player(namePlayerY, PlayerType.O);
         this.id = nextId++;
         this.scorePlayer1 = 0;
         this.scorePlayer2 = 0;
@@ -119,15 +119,6 @@ public class Game {
         return counter == PlayerX * size || counter == PlayerY * size;
     }
 
-    private Player createPlayer(String playerName) {
-        Player player = Player.getExistingPlayer(playerName);
-        if (player == null)
-            return null;
-            //new Player(playerName,0,0,0,0);
-        else
-            return null;
-        //player;
-    }
 
     public Turn getTurn() {
         return turn;
