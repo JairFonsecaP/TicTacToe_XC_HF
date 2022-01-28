@@ -2,7 +2,6 @@ package tictactoe.controllers;
 
 
 import tictactoe.models.Welcome;
-
 import tictactoe.views.history.HistoryPanel;
 import tictactoe.views.history.HistoryWindow;
 import tictactoe.views.welcome.WelcomePanel;

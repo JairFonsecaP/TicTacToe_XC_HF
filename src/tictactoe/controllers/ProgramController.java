@@ -2,22 +2,20 @@ package tictactoe.controllers;
 
 
 import tictactoe.models.Welcome;
+import tictactoe.views.Window;
 import tictactoe.views.welcome.WelcomePanel;
-import tictactoe.views.welcome.WelcomeWindow;
-
-import java.awt.*;
 
 public class ProgramController
 {
-    private final WelcomeWindow window;
+    private final Window window;
     public ProgramController()
     {
         //Model
         Welcome welcome = new Welcome();
         //View
         WelcomePanel panel = new WelcomePanel();
-        //SGamePanel gamePanel = new GamePanel(3);
-        window = new WelcomeWindow("Welcome!", panel);
+
+        window = new Window("Welcome!", panel);
         //Controller
         WelcomeController controller = new WelcomeController(welcome, panel, this);
 
