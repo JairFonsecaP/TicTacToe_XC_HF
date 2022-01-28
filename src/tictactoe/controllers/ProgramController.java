@@ -1,15 +1,15 @@
 package tictactoe.controllers;
 
-import tictactoe.models.Game;
+
 import tictactoe.models.Welcome;
-import tictactoe.views.WelcomePanel;
-import tictactoe.views.Window;
-import tictactoe.views.game.GamePanel;
-import tictactoe.views.game.GameWindow;
+import tictactoe.views.welcome.WelcomePanel;
+import tictactoe.views.welcome.WelcomeWindow;
+
+import java.awt.*;
 
 public class ProgramController
 {
-    private final Window window;
+    private final WelcomeWindow window;
     public ProgramController()
     {
         //Model
@@ -17,7 +17,7 @@ public class ProgramController
         //View
         WelcomePanel panel = new WelcomePanel();
         //SGamePanel gamePanel = new GamePanel(3);
-        window = new Window("Welcome!", panel);
+        window = new WelcomeWindow("Welcome!", panel);
         //Controller
         WelcomeController controller = new WelcomeController(welcome, panel, this);
 

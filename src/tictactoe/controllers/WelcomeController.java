@@ -1,18 +1,17 @@
 package tictactoe.controllers;
 
-import tictactoe.models.Game;
-import tictactoe.models.Player;
+
 import tictactoe.models.Welcome;
-import tictactoe.views.Window;
-import tictactoe.views.game.GamePanel;
-import tictactoe.views.game.GameWindow;
-import tictactoe.views.WelcomePanel;
+
+import tictactoe.views.history.HistoryPanel;
+import tictactoe.views.history.HistoryWindow;
+import tictactoe.views.welcome.WelcomePanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 
 
 public class WelcomeController {
