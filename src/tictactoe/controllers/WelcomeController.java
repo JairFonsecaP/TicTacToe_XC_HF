@@ -1,13 +1,12 @@
 package tictactoe.controllers;
 
+import tictactoe.models.Game;
+import tictactoe.models.Player;
 import tictactoe.models.Welcome;
-import tictactoe.views.history.HistoryInformationPanel;
-import tictactoe.views.history.HistoryPanel;
-import tictactoe.views.history.HistoryWindow;
-import tictactoe.views.welcome.WelcomeWindow;
+import tictactoe.views.Window;
 import tictactoe.views.game.GamePanel;
 import tictactoe.views.game.GameWindow;
-import tictactoe.views.welcome.WelcomePanel;
+import tictactoe.views.WelcomePanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,13 +18,15 @@ import java.awt.event.MouseListener;
 public class WelcomeController {
     private final Welcome welcome;//Model
     private final WelcomePanel view;
-    private final WelcomeWindow windowWelcome;
+    private final ProgramController programController;
 
-    public WelcomeController(Welcome welcome, WelcomePanel view, WelcomeWindow window){
+
+    public WelcomeController(Welcome welcome, WelcomePanel view, ProgramController programController){
 
         this.welcome = welcome;
         this.view = view;
-        this.windowWelcome = window;
+        this.programController = programController;
+
 
         initializeView(view);
 
@@ -47,11 +48,8 @@ public class WelcomeController {
 
     private void onPlayClicked() {
         if(playersNamesAreValid()){
-
-            GamePanel panel = new GamePanel(view.getBoardSize(), view.getPlayer1JTextField(), view.getPlayer2JTextField());
-            GameWindow window = new GameWindow("Tic Tac Toe Game", panel);
-            window.setVisible(true);
-            windowWelcome.dispose();
+            programController.closeWelcomeWindow();
+            ProgramController.playGame(view.getBoardSize(),view.getPlayer1JTextField(), view.getPlayer2JTextField());
         }else{
             JOptionPane.showMessageDialog( view.getParent(),"Error: Players names are invalid","Tic Tac Toe Game",
                     JOptionPane.ERROR_MESSAGE);

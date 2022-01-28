@@ -1,12 +1,12 @@
 package tictactoe.models;
 
 import tictactoe.logs.PlayerObjectLogger;
-
 import java.io.Serializable;
 
 public class Player implements Serializable {
     private static transient long nextPlayerNumber = 1000001;
     private static transient PlayerObjectLogger playerObjectLogger;
+    private final PlayerType playerType;
     private final long playerNumber;
     private String name;
     private int numberOfGames;
@@ -14,8 +14,9 @@ public class Player implements Serializable {
     private int numberOfGamesLost;
     private int numberOfGamesDrew;
 
-    public Player(String name,int numberOfGames, int numberOfGamesWon, int numberOfGamesLost, int numberOfGamesDrew){
+    public Player(String name,PlayerType playerType, int numberOfGames, int numberOfGamesWon, int numberOfGamesLost, int numberOfGamesDrew){
         playerNumber = nextPlayerNumber++;
+        this.playerType = playerType;
         setName(name);
         setNumberOfGames(numberOfGames);
         setNumberOfGamesWon(numberOfGamesWon);

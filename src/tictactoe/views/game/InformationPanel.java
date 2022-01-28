@@ -33,8 +33,8 @@ public class InformationPanel extends JPanel
         setLayout(new GridLayout(2,1));
         upperPanel.add(dateLabel);
 
-        JLabel playerXLabel = new JLabel(game.getPlayer1().getName());
-        JLabel playerYLabel = new JLabel(game.getPlayer2().getName());
+        JLabel playerXLabel = new JLabel(game.getPlayerX().getName());
+        JLabel playerYLabel = new JLabel(game.getPlayerY().getName());
 
         lowerPanel.add(playerXLabel);
         lowerPanel.add(playerYLabel);

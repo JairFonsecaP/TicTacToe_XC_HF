@@ -4,49 +4,131 @@ import tictactoe.interfaces.IGameListener;
 
 import java.util.ArrayList;
 
-public class Game
-{
+public class Game {
+
+    private static final int PlayerX = 1;
+    private static final int PlayerY = 10;
+    private static final int Empty = 0;
     private static int nextId = 1;
     private final int id;
     private final Turn turn;
 
-
-    private final Player player1;
-    private final Player player2;
-    private int scorePlayer1;
-    private int scorePlayer2;
-    private int round;
+    private final int scorePlayer1;
+    private final int scorePlayer2;
+    private final int round;
+    private final int size;
+    private final ArrayList<ArrayList> rows;
 
     private transient ArrayList<IGameListener> listeners;
 
 
-    public Game(String player1, String player2)
-    {
+    private final Player playerX;
+    private final Player playerY;
+
+    public Game(int size, String namePlayerX, String namePlayerY) {
+        playerX = new Player(namePlayerX, PlayerType.X, 0, 0, 0, 0);
+        playerY = new Player(namePlayerY, PlayerType.O, 0, 0, 0, 0);
         this.id = nextId++;
-        this.player1 = createPlayer(player1);
-        this.player2 = createPlayer(player2);
         this.scorePlayer1 = 0;
         this.scorePlayer2 = 0;
         this.round = 1;
         turn = new Turn();
+        this.size = size;
+
+        rows = createRows(this.size);
         listeners = new ArrayList<>();
+    }
+
+    public Player getPlayerX() {
+        return playerX;
+    }
+
+    public Player getPlayerY() {
+        return playerY;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    private static final ArrayList createRows(int sizeSide) {
+        ArrayList<ArrayList> toReturn = new ArrayList<>();
+        for (int i = 0; i < sizeSide; i++) {
+            ArrayList<Integer> row = new ArrayList<>();
+            for (int j = 0; j < sizeSide; j++) {
+                row.add(Empty);
+            }
+            toReturn.add(row);
+
+        }
+        return toReturn;
+    }
+
+    public boolean isThereWinner() {
+        return validateRows() || validateColumns() || validateDiagonal();
+    }
+
+    private boolean validateRows() {
+        for (int i = 0; i < size; i++) {
+            int counter = 0;
+            for (int j = 0; j < size; j++)
+                counter += (Integer) rows.get(i).get(j);
+
+            if (counter == PlayerX * size || counter == PlayerY * size)
+                return true;
+        }
+        return false;
+    }
+
+    private boolean validateColumns() {
+        for (int i = 0; i < size; i++) {
+            int counter = 0;
+            for (int j = 0; j < size; j++)
+                counter += (Integer) rows.get(j).get(i);
+
+            if (counter == PlayerX * size || counter == PlayerY * size) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    private boolean validateDiagonal() {
+        return validateDiagonal(rows) || validateDiagonal(transposeMatrix());
+    }
+
+    private ArrayList<ArrayList> transposeMatrix() {
+        ArrayList<ArrayList> matrix = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            ArrayList<Integer> row = new ArrayList<>();
+            for (int j = size - 1; j >= 0; j--) {
+                row.add((Integer) rows.get(i).get(j));
+            }
+            matrix.add(row);
+        }
+        return matrix;
+    }
+
+    private boolean validateDiagonal(ArrayList<ArrayList> matrix) {
+        int counter = 0;
+        for (int i = 0; i < size; i++) {
+            counter += (Integer) matrix.get(i).get(i);
+        }
+
+        return counter == PlayerX * size || counter == PlayerY * size;
     }
 
     private Player createPlayer(String playerName) {
         Player player = Player.getExistingPlayer(playerName);
         if (player == null)
-            return new Player(playerName,0,0,0,0);
+            return null;
+            //new Player(playerName,0,0,0,0);
         else
-            return player;
+            return null;
+        //player;
     }
 
-    public Player getPlayer1() {
-        return player1;
-    }
-
-    public Player getPlayer2() {
-        return player2;
-    }
     public Turn getTurn() {
         return turn;
     }
@@ -62,11 +144,29 @@ public class Game
     public int getRound() {
         return round;
     }
-    public void addListener(IGameListener listener){
+
+    public void addListener(IGameListener listener) {
         listeners.add(listener);
     }
-    public void removeListener(IGameListener listener){
+
+    public void removeListener(IGameListener listener) {
         listeners.remove(listener);
+    }
+
+    public void setAPosition(int x, int y) {
+        if (canPlay(x, y))
+            rows.get(x).set(y, turn.getTurnPlayer() == PlayerType.X ? PlayerX : PlayerY);
+        for (IGameListener listener : listeners) {
+            listener.buttonClicked(x, y);
+        }
+        if (isThereWinner())
+            System.out.println("Hay ganador");
+        else
+            turn.changeTurn();
+    }
+
+    private boolean canPlay(int x, int y) {
+        return rows.get(x).get(y) == (Integer) Empty;
     }
 
 }

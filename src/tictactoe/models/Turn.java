@@ -1,13 +1,10 @@
 package tictactoe.models;
 
-import tictactoe.PlayerType;
-
 import java.util.Random;
 
 public class Turn
 {
     private boolean turn;
-    private PlayerType playerType;
     private static final Random random;
 
     static
