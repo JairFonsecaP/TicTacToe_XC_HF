@@ -1,7 +1,7 @@
 import tictactoe.controllers.WelcomeController;
 import tictactoe.models.Welcome;
-import tictactoe.views.WelcomePanel;
-import tictactoe.views.Window;
+import tictactoe.views.welcome.WelcomePanel;
+import tictactoe.views.welcome.WelcomeWindow;
 
 public class Program {
 
@@ -11,7 +11,7 @@ public class Program {
         //View
         WelcomePanel panel = new WelcomePanel();
         //SGamePanel gamePanel = new GamePanel(3);
-        Window window = new Window("Welcome!", panel);
+        WelcomeWindow window = new WelcomeWindow("Welcome!", panel);
         //Controller
         WelcomeController controller = new WelcomeController(welcome, panel, window);
 

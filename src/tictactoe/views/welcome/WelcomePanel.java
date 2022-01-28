@@ -1,4 +1,4 @@
-package tictactoe.views;
+package tictactoe.views.welcome;
 
 import tictactoe.interfaces.IWelcomeListener;
 import utility.PanelHelper;
@@ -6,12 +6,14 @@ import utility.PanelHelper;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 public class WelcomePanel extends JPanel implements IWelcomeListener {
 
 
     private final JTextField player1JTextField;
     private final JTextField player2JTextField;
+    private final JLabel historyLabel;
     private final JComboBox boardSizeList;
     String[] boardSizes = {"3x3", "4x4", "5x5"};
     private final JButton btnExit;
@@ -23,7 +25,7 @@ public class WelcomePanel extends JPanel implements IWelcomeListener {
         boardSizeList = new JComboBox(boardSizes);
         btnExit = new JButton("Exit");
         btnPlay = new JButton("Play");
-
+        historyLabel = new JLabel("History");
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(PanelHelper.createLargeEmptyBorder());
@@ -45,7 +47,6 @@ public class WelcomePanel extends JPanel implements IWelcomeListener {
     private JPanel createHistoryLinkPanel() {
         JPanel historyPanel = new JPanel();
         historyPanel.setLayout(new BoxLayout(historyPanel, BoxLayout.X_AXIS));
-        JLabel historyLabel = new JLabel("History");
         historyLabel.setForeground(Color.BLUE.darker());
         historyLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         historyPanel.add(historyLabel);
@@ -132,6 +133,9 @@ public class WelcomePanel extends JPanel implements IWelcomeListener {
     }
     public void addPlayListener(ActionListener listener){
         btnPlay.addActionListener(listener);
+    }
+    public void addHistoryListener(MouseListener listener){
+        historyLabel.addMouseListener(listener);
     }
 
     public String getPlayer1JTextField() {

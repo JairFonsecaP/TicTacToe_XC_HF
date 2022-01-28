@@ -1,10 +1,10 @@
-package tictactoe.views;
+package tictactoe.views.welcome;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Window extends JFrame {
-    public Window(String title, Container contentPane){
+public class WelcomeWindow extends JFrame {
+    public WelcomeWindow(String title, Container contentPane){
         super(title);
 
         setContentPane(contentPane);

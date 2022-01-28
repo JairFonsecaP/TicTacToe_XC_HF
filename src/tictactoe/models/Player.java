@@ -1,6 +1,5 @@
 package tictactoe.models;
 
-import tictactoe.controllers.PlayerLoaderController;
 import tictactoe.logs.PlayerObjectLogger;
 
 import java.io.Serializable;
