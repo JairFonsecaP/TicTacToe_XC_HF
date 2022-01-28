@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+import java.io.IOException;
 
 
 public class WelcomeController {
@@ -35,10 +35,15 @@ public class WelcomeController {
         view.addHistoryListener((new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                HistoryPanel historyPanel = new HistoryPanel();
-                HistoryWindow historyWindow = new HistoryWindow("History", historyPanel);
-                HistoryController controller = new HistoryController(historyWindow, historyPanel.getHistoryInformation());
-                historyWindow.setVisible(true);
+                HistoryPanel historyPanel = null;
+                try {
+                    historyPanel = new HistoryPanel();
+                    HistoryWindow historyWindow = new HistoryWindow("History", historyPanel);
+                    HistoryController controller = new HistoryController(historyWindow, historyPanel.getHistoryInformation());
+                    historyWindow.setVisible(true);
+                } catch (IOException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
             }
         }));
     }
