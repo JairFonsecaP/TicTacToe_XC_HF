@@ -48,6 +48,11 @@ public class Player implements Serializable {
 
     }
 
+    public PlayerType getPlayerType()
+    {
+        return playerType;
+    }
+
     public static void getHistory() {
         History history = new History();
         players = history.getPlayers();

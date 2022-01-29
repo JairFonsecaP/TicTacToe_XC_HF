@@ -2,7 +2,6 @@ package tictactoe.views.welcome;
 
 import tictactoe.interfaces.IWelcomeListener;
 import utility.PanelHelper;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -147,7 +146,7 @@ public class WelcomePanel extends JPanel implements IWelcomeListener {
     }
     public int getBoardSize(){
         switch (boardSizeList.getSelectedIndex()){
-            case 0: return 3;
+            case 0: return  3;
             case 1: return 4;
             case 2: return 5;
             default: return 0;

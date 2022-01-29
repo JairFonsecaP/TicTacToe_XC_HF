@@ -18,43 +18,43 @@ public class Game {
     private int scorePlayerO;
     private int round;
     private final int size;
-    private final ArrayList<ArrayList> rows;
-
-    private transient ArrayList<IGameListener> listeners;
-
+    private ArrayList<ArrayList<Integer>> rows;
+    private transient final ArrayList<IGameListener> listeners;
 
     private final Player playerX;
-    private final Player playerY;
+    private final Player playerO;
 
+    private Player winner;
+    private int elapsedTurns;
 
     public Game(int size, String namePlayerX, String namePlayerY) {
         playerX = new Player(namePlayerX, PlayerType.X);
-        playerY = new Player(namePlayerY, PlayerType.O);
+        playerO = new Player(namePlayerY, PlayerType.O);
         this.id = nextId++;
         this.scorePlayerX = 0;
         this.scorePlayerO = 0;
         this.round = 1;
         turn = new Turn();
         this.size = size;
-
+        winner = null;
+        elapsedTurns = 0;
         rows = createRows(this.size);
         listeners = new ArrayList<>();
     }
-
-    public Player getPlayerX() {
-        return playerX;
+    public int getId()
+    {
+        return id;
     }
+    public Player getWinner() { return winner; }
 
-    public Player getPlayerY() {
-        return playerY;
-    }
+    public Player getPlayerX() { return playerX; }
 
-    public int getSize() {
-        return size;
-    }
+    public Player getPlayerO() { return playerO; }
 
-    private static final ArrayList createRows(int sizeSide) {
-        ArrayList<ArrayList> toReturn = new ArrayList<>();
+    public int getSize() { return size; }
+
+    private static  ArrayList<ArrayList<Integer>> createRows(int sizeSide) {
+        ArrayList<ArrayList<Integer>> toReturn = new ArrayList<>();
         for (int i = 0; i < sizeSide; i++) {
             ArrayList<Integer> row = new ArrayList<>();
             for (int j = 0; j < sizeSide; j++) {
@@ -74,7 +74,7 @@ public class Game {
         for (int i = 0; i < size; i++) {
             int counter = 0;
             for (int j = 0; j < size; j++)
-                counter += (Integer) rows.get(i).get(j);
+                counter += rows.get(i).get(j);
 
             if (counter == PlayerX * size || counter == PlayerY * size)
                 return true;
@@ -86,7 +86,7 @@ public class Game {
         for (int i = 0; i < size; i++) {
             int counter = 0;
             for (int j = 0; j < size; j++)
-                counter += (Integer) rows.get(j).get(i);
+                counter += rows.get(j).get(i);
 
             if (counter == PlayerX * size || counter == PlayerY * size) {
                 return true;
@@ -100,27 +100,30 @@ public class Game {
         return validateDiagonal(rows) || validateDiagonal(transposeMatrix());
     }
 
-    private ArrayList<ArrayList> transposeMatrix() {
-        ArrayList<ArrayList> matrix = new ArrayList<>();
+    private ArrayList<ArrayList<Integer>> transposeMatrix() {
+        ArrayList<ArrayList<Integer>> matrix = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             ArrayList<Integer> row = new ArrayList<>();
             for (int j = size - 1; j >= 0; j--) {
-                row.add((Integer) rows.get(i).get(j));
+                row.add( rows.get(i).get(j));
             }
             matrix.add(row);
         }
         return matrix;
     }
 
-    private boolean validateDiagonal(ArrayList<ArrayList> matrix) {
+    private boolean validateDiagonal(ArrayList<ArrayList<Integer>> matrix) {
         int counter = 0;
         for (int i = 0; i < size; i++) {
-            counter += (Integer) matrix.get(i).get(i);
+            counter += matrix.get(i).get(i);
         }
-
         return counter == PlayerX * size || counter == PlayerY * size;
     }
 
+    public boolean isATieGame()
+    {
+        return elapsedTurns == (size*size);
+    }
 
     public Turn getTurn() {
         return turn;
@@ -134,11 +137,11 @@ public class Game {
         return scorePlayerO;
     }
 
-    public void setScorePlayerX(int scorePlayerX) {
+    private void setScorePlayerX(int scorePlayerX) {
         this.scorePlayerX = scorePlayerX;
     }
 
-    public void setScorePlayerO(int scorePlayerO) {
+    private void setScorePlayerO(int scorePlayerO) {
         this.scorePlayerO = scorePlayerO;
     }
 
@@ -153,31 +156,90 @@ public class Game {
     public void removeListener(IGameListener listener) {
         listeners.remove(listener);
     }
+    public int getElapsedTurns()
+    {
+        return elapsedTurns;
+    }
 
-    public void setAPosition(int x, int y) {
-        PlayerType playerType = turn.getTurnPlayer() ;
+    public void setElapsedTurns(int elapsedTurns)
+    {
+        this.elapsedTurns = elapsedTurns;
+    }
+
+    public void play(int x, int y,Player player) {
+        setPosition(x,y,player);
+
+    }
+
+    private void setPosition(int x, int y, Player player)
+    {
         if (canPlay(x, y))
-            rows.get(x).set(y, playerType == PlayerType.X ? PlayerX : PlayerY);
+            rows.get(x).set(y, player.getPlayerType() == PlayerType.X ? PlayerX : PlayerY);
         for (IGameListener listener : listeners) {
-            listener.buttonClicked(x, y);
+            listener.buttonClicked(x, y, player);
         }
-        if (isThereWinner()) {
-            if(playerType == PlayerType.X)
-                setScorePlayerX(getScorePlayerX()+1);
-            else
-                setScorePlayerO(getScorePlayerO()+1);
-            for (IGameListener listener : listeners) {
-                listener.thereIsWinner(playerType);
-            }
+    }
+
+    private void incrementRound()
+    {
+        setRound(round + 1);
+
+    }
+
+    private void setRound(int round)
+    {
+        this.round = round;
+        for (IGameListener listener: listeners)
+        {
+            listener.setRound(round);
+        }
+    }
+
+    private void increaseScorePlayerX()
+    {
+        int score = scorePlayerX + 1;
+        setScorePlayerX(score);
+    }
+
+    private void increaseScorePlayerO()
+    {
+        int score = scorePlayerO + 1;
+        setScorePlayerO(score);
+    }
+    private boolean canPlay(int x, int y) {
+        return rows.get(x).get(y).equals(Empty);
+    }
+
+    public void thereIsWinner(Player player)
+    {
+        setWinner(player);
+        if (player.getPlayerType() == PlayerType.X)
+        {
+            increaseScorePlayerX();
         }
         else
-            turn.changeTurn();
+        {
+            increaseScorePlayerO();
+        }
     }
 
-    private boolean canPlay(int x, int y) {
-        return rows.get(x).get(y) == (Integer) Empty;
+    private void setWinner(Player winner)
+    {
+        this.winner = winner;
+
     }
 
-
+    public void restart()
+    {
+        incrementRound();
+        turn.restart();
+        rows = createRows(size);
+        elapsedTurns=0;
+        winner = null;
+        for (IGameListener listener: listeners)
+        {
+            listener.restart();
+        }
+    }
 
 }

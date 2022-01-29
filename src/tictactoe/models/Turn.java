@@ -36,4 +36,9 @@ public class Turn
     {
         this.turn = turn;
     }
+
+    public void restart()
+    {
+        setTurn(selectRandomTurn());
+    }
 }

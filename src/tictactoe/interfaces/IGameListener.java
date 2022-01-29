@@ -1,10 +1,9 @@
 package tictactoe.interfaces;
 
-import tictactoe.models.PlayerType;
-
-import javax.swing.*;
+import tictactoe.models.Player;
 
 public interface IGameListener {
-    void buttonClicked(int x,int y);
-    void thereIsWinner(PlayerType player);
+    void buttonClicked(int x,int y, Player player);
+    void restart();
+    void setRound(int round);
 }

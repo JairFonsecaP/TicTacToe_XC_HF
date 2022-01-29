@@ -23,7 +23,7 @@ public enum PlayerType {
             return Color.RED;
     }
 
-    private boolean isPlayerX() {
+    public boolean isPlayerX() {
         return this == PlayerType.X;
     }
 

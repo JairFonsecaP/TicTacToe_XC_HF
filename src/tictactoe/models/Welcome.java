@@ -11,7 +11,6 @@ public class Welcome {
 
     public Welcome(){
         listeners = new ArrayList<>();
-
     }
     public void addListener(IWelcomeListener listener){
         listeners.add(listener);
