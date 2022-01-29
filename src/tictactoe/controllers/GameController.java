@@ -36,10 +36,6 @@ public class GameController {
         play(button,player);
         if (model.getElapsedTurns() >= model.getSize())
             validateWinner(player);
-
-
-        model.getTurn().changeTurn();
-
     }
 
     private void validateWinner(Player player)

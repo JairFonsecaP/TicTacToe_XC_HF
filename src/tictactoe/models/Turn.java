@@ -1,5 +1,4 @@
 package tictactoe.models;
-
 import java.util.Random;
 
 public class Turn

@@ -166,24 +166,21 @@ public class Game {
         this.elapsedTurns = elapsedTurns;
     }
 
-    public void play(int x, int y,Player player) {
-        setPosition(x,y,player);
-
-    }
-
-    private void setPosition(int x, int y, Player player)
+    public void play(int x, int y, Player player)
     {
         if (canPlay(x, y))
             rows.get(x).set(y, player.getPlayerType() == PlayerType.X ? PlayerX : PlayerY);
+        turn.changeTurn();
+        incrementRound();
         for (IGameListener listener : listeners) {
             listener.buttonClicked(x, y, player);
+            listener.setTurn(turn);
         }
     }
 
     private void incrementRound()
     {
         setRound(round + 1);
-
     }
 
     private void setRound(int round)
@@ -239,6 +236,7 @@ public class Game {
         for (IGameListener listener: listeners)
         {
             listener.restart();
+            listener.setTurn(turn);
         }
     }
 

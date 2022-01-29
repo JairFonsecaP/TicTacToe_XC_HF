@@ -2,6 +2,8 @@ package tictactoe.views.game;
 
 import tictactoe.interfaces.IGameListener;
 import tictactoe.models.Player;
+import tictactoe.models.PlayerType;
+import tictactoe.models.Turn;
 import utility.PanelHelper;
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 public class GamePanel extends JPanel  implements IGameListener {
 
     private JLabel roundLabel;
+    private JLabel turnLabel;
     private final int size;
     private final ArrayList<ArrayList<SingleSquareGame>> matrix;
     public GamePanel(int size, int round,String namePlayerX, String namePlayerO)
@@ -20,6 +23,7 @@ public class GamePanel extends JPanel  implements IGameListener {
         this.size = size;
         matrix = new ArrayList<>();
         roundLabel = new JLabel("Round: " + round);
+        turnLabel = new JLabel();
         JPanel gameZonePanel = createGameZonePanel();
         JPanel informationPanel = createUpperPanel(namePlayerX,namePlayerO);
 
@@ -76,6 +80,7 @@ public class GamePanel extends JPanel  implements IGameListener {
         JLabel playerOLabel = new JLabel(namePlayerO);
 
         lowerPanel.add(playerXLabel);
+        lowerPanel.add(turnLabel);
         lowerPanel.add(playerOLabel);
 
         panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
@@ -118,5 +123,14 @@ public class GamePanel extends JPanel  implements IGameListener {
     @Override
     public void setRound(int round) {
         roundLabel.setText("Round: " + round);
+    }
+
+    @Override
+    public void setTurn(Turn turn)
+    {
+        if(turn.getTurnPlayer() == PlayerType.X)
+            turnLabel.setText("Turn of \n <-------");
+        else
+            turnLabel.setText("Turn of \n ------->");
     }
 }
