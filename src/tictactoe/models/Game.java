@@ -169,11 +169,12 @@ public class Game {
         if (canPlay(x, y))
             rows.get(x).set(y, player.getPlayerType() == PlayerType.X ? PlayerX : PlayerY);
         turn.changeTurn();
-        //incrementRound();
+
         for (IGameListener listener : listeners) {
             listener.buttonClicked(x, y, player);
             listener.setTurn(turn);
         }
+
     }
 
     private void incrementRound()

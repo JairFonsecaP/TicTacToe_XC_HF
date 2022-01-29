@@ -1,5 +1,6 @@
 package tictactoe.controllers;
 
+import tictactoe.logs.GameTextLogger;
 import tictactoe.logs.PlayerObjectLogger;
 import tictactoe.models.Game;
 import tictactoe.models.Player;
@@ -20,17 +21,18 @@ public class GameController {
 
     private final GameWindow window;
 
+    private GameTextLogger gameTextLogger;
+
     public GameController(int size, String namePlayerX, String namePlayerY) {
 
         model = new Game(size, namePlayerX, namePlayerY);
-
         view = new GamePanel(size, model.getRound(), model.getPlayerX().getName(),model.getPlayerO().getName());
         window = new GameWindow("Tic Tac Toe Game", view);
         window.setVisible(true);
         model.addListener(view);
         view.setTurn(model.getTurn());
         view.addButtonsListener((ActionEvent e) -> onButtonClicked(e));
-        //TODO escribir log de jugada
+        gameTextLogger = new GameTextLogger(model);
     }
 
     private void onButtonClicked(ActionEvent e) {
@@ -47,10 +49,12 @@ public class GameController {
         if (model.isThereWinner()) {
             model.thereIsWinner(player);
             alert();
+            gameTextLogger.writeLogFile("Round Over " + player.getName() + " won.");
         }
         else if (model.isATieGame())
         {
             alert();
+            gameTextLogger.writeLogFile("Round Over. Drew game: There is no winner. ");
         }
     }
 
@@ -65,6 +69,7 @@ public class GameController {
             model.restart();
             view.scoreOPlayerChanged(model.getScorePlayerO());
             view.scoreXPlayerChanged(model.getScorePlayerX());
+
         }
         else
         {
@@ -86,6 +91,7 @@ public class GameController {
 
                 PlayerObjectLogger.writePlayerLog(model.getPlayerX());
                 PlayerObjectLogger.writePlayerLog(model.getPlayerO());
+                gameTextLogger.writeLogFile("Game Over. There is no winner.");
             }
 
             if (JOptionPane.showConfirmDialog(
@@ -100,9 +106,7 @@ public class GameController {
 
                 window.dispose();
                 programController = new ProgramController();
-
             }
-
         }
     }
 
@@ -113,6 +117,8 @@ public class GameController {
 
         loser.setNumberOfGamesLost(loser.getNumberOfGamesLost()+1);
         PlayerObjectLogger.writePlayerLog(loser);
+
+        gameTextLogger.writeLogFile("Game Over [Winner: " + winner.getName()+ " ] [Loser: " + loser.getName()+ "]");
     }
 
     private JPanel createEndGameAlert(Player winner, Player playerX, Player playerO, int scorePlayerX, int scorePlayerO ) {
@@ -139,10 +145,14 @@ public class GameController {
         ArrayList<ArrayList<SingleSquareGame>> matrix = view.getMatrix();
         for (int i = 0; i < matrix.size(); i++) {
             for (int j = 0; j < matrix.get(i).size(); j++) {
-                if (matrix.get(i).get(j).equals(button))
-                    model.play(i, j,player);
+                if (matrix.get(i).get(j).equals(button)) {
+                    model.play(i, j, player);
+                    gameTextLogger.writeLogFile("Button clicked on coordinate: [" + i +"," + j + "]");
+                }
             }
         }
         model.setElapsedTurns(model.getElapsedTurns() + 1);
+
+
     }
 }
