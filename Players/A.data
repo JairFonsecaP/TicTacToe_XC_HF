@@ -1,0 +1,4 @@
+¬í sr tictactoe.models.Player[|ß
+¾È” I 
+numberOfGamesI numberOfGamesDrewI numberOfGamesLostI numberOfGamesWonJ playerNumberL namet Ljava/lang/String;L 
+playerTypet Ltictactoe/models/PlayerType;xp                 BAt A~r tictactoe.models.PlayerType          xr java.lang.Enum          xpt X
