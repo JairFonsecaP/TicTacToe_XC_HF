@@ -1,10 +1,6 @@
 package tictactoe.views.history;
 
 import tictactoe.controllers.HistoryController;
-import tictactoe.controllers.WelcomeController;
-import tictactoe.models.Welcome;
-import tictactoe.views.welcome.WelcomePanel;
-import tictactoe.views.welcome.WelcomeWindow;
 import utility.PanelHelper;
 
 import javax.swing.*;

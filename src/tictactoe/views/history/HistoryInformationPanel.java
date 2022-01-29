@@ -34,6 +34,7 @@ public static ArrayList<Player> players;
         JPanel historyPanel = new JPanel();
         historyPanel.setLayout(new BoxLayout(historyPanel, BoxLayout.X_AXIS));
         add(createHistoryTiles());
+        add(PanelHelper.createSmallSeparator());
         for (Player player: players ) {
             add(createHistoryPlayerPanel(player));
         }
@@ -45,13 +46,12 @@ public static ArrayList<Player> players;
         titles.setBackground(Color.WHITE);
         titles.setAlignmentX(Panel.CENTER_ALIGNMENT);
         titles.setLayout(new GridLayout(1,6));
-        titles.add(new JLabel("Player Number"));
-        titles.add(new JLabel("Name "));
-        titles.add(new JLabel("Games Played "));
-        titles.add(new JLabel("Games Won "));
-        titles.add(new JLabel("Games Lost " ));
-        titles.add(new JLabel("Games Drew " ));
-
+        titles.add(getLabelCentered("Player Number"));
+        titles.add(getLabelCentered("Name "));
+        titles.add(getLabelCentered("Games Played "));
+        titles.add(getLabelCentered("Games Won "));
+        titles.add(getLabelCentered("Games Lost " ));
+        titles.add(getLabelCentered("Games Drew " ));
         return  titles;
     }
 
@@ -60,14 +60,22 @@ public static ArrayList<Player> players;
         playerInformation.setBackground(Color.WHITE);
         playerInformation.setAlignmentX(Panel.CENTER_ALIGNMENT);
         playerInformation.setLayout(new GridLayout(1,6));
-        playerInformation.add(new JLabel(String.valueOf(player.getPlayerNumber())));
-        playerInformation.add(new JLabel(player.getName()));
-        playerInformation.add(new JLabel(String.valueOf(player.getNumberOfGames())));
-        playerInformation.add(new JLabel(String.valueOf(player.getNumberOfGamesWon())));
-        playerInformation.add(new JLabel(String.valueOf(player.getNumberOfGamesLost()) ));
-        playerInformation.add(new JLabel(String.valueOf(player.getNumberOfGamesDrew())));
-        Font font = playerInformation.getFont();
-        playerInformation.setFont(new Font(font.getFontName(), Font.PLAIN, font.getSize()));
+        playerInformation.add(getLabelCentered(String.valueOf(player.getPlayerNumber())));
+        playerInformation.add(getLabelCentered(player.getName()));
+        playerInformation.add(getLabelCentered(String.valueOf(player.getNumberOfGames())));
+        playerInformation.add(getLabelCentered(String.valueOf(player.getNumberOfGamesWon())));
+        playerInformation.add(getLabelCentered(String.valueOf(player.getNumberOfGamesLost()) ));
+        playerInformation.add(getLabelCentered(String.valueOf(player.getNumberOfGamesDrew())));
+
+
         return  playerInformation;
+    }
+
+    private JLabel getLabelCentered(String text){
+        JLabel label = new JLabel(text);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        Font font = label.getFont();
+        label.setFont(new Font(font.getFontName(), Font.PLAIN, font.getSize()));
+        return label;
     }
 }

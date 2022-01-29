@@ -29,22 +29,27 @@ public class Player implements Serializable {
         if (players.size() != 0) {
             Player existing  = getPlayerByName(name);
             if ( existing != null) {
-                this.equals(existing);
+                setName(name);
+                setNumberOfGames(existing.getNumberOfGames());
+                setNumberOfGamesWon(existing.getNumberOfGamesWon());
+                setNumberOfGamesLost(existing.getNumberOfGamesLost());
+                setNumberOfGamesDrew(existing.getNumberOfGamesDrew());
                 finalId = existing.getPlayerNumber();
             }else{
                 nextPlayerNumber = getMaximumId() + 1;
                 finalId = nextPlayerNumber;
+                setNewPlayer(name);
             }
         }else{
             finalId = nextPlayerNumber++;
+            setNewPlayer(name);
         }
 
-        setNewPlayer(name);
         playerNumber = finalId;
         this.playerType = playerType;
 
-        playerObjectLogger = new PlayerObjectLogger(this);
-        playerObjectLogger.writePlayerLog();
+
+        PlayerObjectLogger.writePlayerLog(this);
 
     }
 

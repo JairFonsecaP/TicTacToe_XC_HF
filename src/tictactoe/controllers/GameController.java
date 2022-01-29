@@ -1,5 +1,6 @@
 package tictactoe.controllers;
 
+import tictactoe.logs.PlayerObjectLogger;
 import tictactoe.models.Game;
 import tictactoe.models.Player;
 
@@ -17,12 +18,14 @@ public class GameController {
     private final GamePanel view;
     private final Game model;
 
+    private final GameWindow window;
+
     public GameController(int size, String namePlayerX, String namePlayerY) {
 
         model = new Game(size, namePlayerX, namePlayerY);
 
         view = new GamePanel(size, model.getRound(), model.getPlayerX().getName(),model.getPlayerO().getName());
-        GameWindow window = new GameWindow("Tic Tac Toe Game", view);
+        window = new GameWindow("Tic Tac Toe Game", view);
         window.setVisible(true);
         model.addListener(view);
         view.setTurn(model.getTurn());
@@ -53,6 +56,7 @@ public class GameController {
 
     private void alert()
     {
+        ProgramController programController;
         if (JOptionPane.showConfirmDialog(
                 view.getParent(),
                 createMessageOfAlert(),
@@ -64,6 +68,9 @@ public class GameController {
         }
         else
         {
+            model.getPlayerX().setNumberOfGames(model.getPlayerX().getNumberOfGames()+1);
+            model.getPlayerO().setNumberOfGames(model.getPlayerO().getNumberOfGames()+1);
+
             Player gameWinner = null;
 
             if (model.getScorePlayerO() > model.getScorePlayerX()){
@@ -75,9 +82,10 @@ public class GameController {
             }
             else{
                 model.getPlayerO().setNumberOfGamesDrew(model.getPlayerO().getNumberOfGamesDrew()+1);
-                model.getPlayerO().setNumberOfGames(model.getPlayerO().getNumberOfGames()+1);
                 model.getPlayerX().setNumberOfGamesDrew(model.getPlayerX().getNumberOfGamesDrew()+1);
-                model.getPlayerX().setNumberOfGames(model.getPlayerX().getNumberOfGames()+1);
+
+                PlayerObjectLogger.writePlayerLog(model.getPlayerX());
+                PlayerObjectLogger.writePlayerLog(model.getPlayerO());
             }
 
             if (JOptionPane.showConfirmDialog(
@@ -88,20 +96,23 @@ public class GameController {
                             model.getScorePlayerX(),
                             model.getScorePlayerO() ),
                     "Game Over",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.YES_OPTION)
-            System.exit(0);
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.YES_OPTION){
+
+                window.dispose();
+                programController = new ProgramController();
+
+            }
+
         }
     }
 
     private void setWinnerAndLoserResults(Player winner, Player loser) {
 
-        //TODO escribir archivo de cada jugador
+        winner.setNumberOfGamesWon(winner.getNumberOfGamesWon() + 1);
+        PlayerObjectLogger.writePlayerLog(winner);
 
-        winner.setNumberOfGames(winner.getNumberOfGames()+1);
-        winner.setNumberOfGamesWon(winner.getNumberOfGamesWon()+1);
-
-        loser.setNumberOfGames(loser.getNumberOfGames()+1);
         loser.setNumberOfGamesLost(loser.getNumberOfGamesLost()+1);
+        PlayerObjectLogger.writePlayerLog(loser);
     }
 
     private JPanel createEndGameAlert(Player winner, Player playerX, Player playerO, int scorePlayerX, int scorePlayerO ) {

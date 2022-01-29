@@ -6,18 +6,7 @@ import java.io.*;
 
 public class PlayerObjectLogger {
 
-    private final String path;
-    private final Player player;
-
-    public PlayerObjectLogger(Player player){
-        path = "Players/" + player.getName() + ".data";
-        this.player = player;
-    }
-
-    public PlayerObjectLogger(){
-        path = "Players/";
-        this.player = null;
-    }
+    private static final String path = "Players/";
 
     public boolean playerExist(String name){
         File file = new File(path + name + ".data");
@@ -36,8 +25,8 @@ public class PlayerObjectLogger {
         return null;
     }
 
-    public void writePlayerLog(){
-        try(ObjectOutputStream out= new ObjectOutputStream(new FileOutputStream(path))){
+    public static void writePlayerLog(Player player){
+        try(ObjectOutputStream out= new ObjectOutputStream(new FileOutputStream(path + player.getName() +  ".data"))){
             out.writeObject(player);
         }catch (IOException e ){
             e.printStackTrace();
