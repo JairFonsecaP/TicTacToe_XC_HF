@@ -15,7 +15,7 @@ public class Game {
 
     private final int scorePlayer1;
     private final int scorePlayer2;
-    private final int round;
+    private int round;
     private final int size;
     private final ArrayList<ArrayList> rows;
 
@@ -24,6 +24,7 @@ public class Game {
 
     private final Player playerX;
     private final Player playerY;
+    private Player winner;
 
     public Game(int size, String namePlayerX, String namePlayerY) {
         playerX = new Player(namePlayerX, PlayerType.X);
@@ -145,13 +146,22 @@ public class Game {
     }
 
     public void setAPosition(int x, int y) {
+        PlayerType playerType = turn.getTurnPlayer() ;
         if (canPlay(x, y))
-            rows.get(x).set(y, turn.getTurnPlayer() == PlayerType.X ? PlayerX : PlayerY);
+            rows.get(x).set(y, playerType == PlayerType.X ? PlayerX : PlayerY);
         for (IGameListener listener : listeners) {
             listener.buttonClicked(x, y);
         }
-        if (isThereWinner())
+        if (isThereWinner()) {
             System.out.println("Hay ganador");
+            //TODO abrir la ventana de ganador
+            //TODO llamar listener de playerChanged para actualizar archivo
+            //TODO: esto es cuando se gana todo el juego, no la ronda:
+            winner = (playerType == PlayerType.X ? getPlayerX() : getPlayerY());
+            winner.setNumberOfGamesWon(winner.getNumberOfGamesWon()+1);
+            playerY.setNumberOfGames(playerY.getNumberOfGames()+1);
+            playerX.setNumberOfGames(playerY.getNumberOfGames()+1);
+        }
         else
             turn.changeTurn();
     }
@@ -159,5 +169,7 @@ public class Game {
     private boolean canPlay(int x, int y) {
         return rows.get(x).get(y) == (Integer) Empty;
     }
+
+
 
 }

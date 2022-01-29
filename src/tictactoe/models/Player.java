@@ -123,14 +123,6 @@ public class Player implements Serializable {
         return numberOfGamesDrew;
     }
 
-    public static Player getExistingPlayer(String name){
-        PlayerObjectLogger playerObjectLogger = new PlayerObjectLogger();
-        if(playerObjectLogger.playerExist(name))
-            return playerObjectLogger.getPlayerObject(name);
-        return null;
-    }
-
-
     private static Player getPlayerByName(String name){
         for (Player player: players) {
             if (player.getName().equals(name))

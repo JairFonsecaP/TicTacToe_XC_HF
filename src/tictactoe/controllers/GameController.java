@@ -12,8 +12,6 @@ import java.util.ArrayList;
 
 public class GameController {
     //
-    private final static char xPlayerCharacter = 'X';
-    private final static char oPlayerCharacter = 'O';
     private final GamePanel view;
     private final Game model;
 
@@ -38,6 +36,9 @@ public class GameController {
                 if (matrix.get(i).get(j).equals(button))
                     model.setAPosition(i, j);
             }
+        }
+        if (model.isThereWinner()){
+            //TODO abrir nueva ventana
         }
     }
 }

@@ -70,7 +70,7 @@ public class GameZonePanel extends JPanel implements IGameListener {
     public void buttonClicked(int x,int y) {
         SingleSquareGame button = matrix.get(x).get(y);
         PlayerType playerType = game.getTurn().getTurnPlayer();
-        button.setText(String.valueOf(playerType.getPlayerTypeStatChar()));
+        button.setText(String.valueOf(playerType.getPlayerTypeChar()));
         button.setEnabled(false);
     }
 }
