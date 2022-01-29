@@ -3,8 +3,6 @@ package tictactoe.models;
 import tictactoe.interfaces.IGameListener;
 
 import java.util.ArrayList;
-//TODO The game saves each move to a log file.
-// TODO Cerrar el juego: cuando el juego termine escribir en los archivos .data de cada jugador
 public class Game {
 
     private static final int PlayerX = 1;

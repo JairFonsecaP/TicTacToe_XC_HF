@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.Locale;
 
 
 public class WelcomeController {
@@ -35,9 +36,9 @@ public class WelcomeController {
         view.addHistoryListener((new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                HistoryPanel historyPanel = null;
+
                 try {
-                    historyPanel = new HistoryPanel();
+                    HistoryPanel historyPanel = new HistoryPanel();
                     HistoryWindow historyWindow = new HistoryWindow("History", historyPanel);
                     HistoryController controller = new HistoryController(historyWindow, historyPanel.getHistoryInformation());
                     historyWindow.setVisible(true);
@@ -52,7 +53,7 @@ public class WelcomeController {
     private void onPlayClicked() {
         if(playersNamesAreValid()){
             programController.closeWelcomeWindow();
-            ProgramController.playGame(view.getBoardSize(),view.getPlayer1JTextField(), view.getPlayer2JTextField());
+            ProgramController.playGame(view.getBoardSize(),view.getPlayer1JTextField().toUpperCase(Locale.ROOT), view.getPlayer2JTextField().toUpperCase());
         }else{
             JOptionPane.showMessageDialog( view.getParent(),"Error: Players names are invalid","Tic Tac Toe Game",
                     JOptionPane.ERROR_MESSAGE);

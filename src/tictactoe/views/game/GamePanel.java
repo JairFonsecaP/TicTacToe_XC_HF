@@ -74,35 +74,43 @@ public class GamePanel extends JPanel  implements IGameListener {
         JPanel upperPanel = new JPanel();
         upperPanel.setLayout(new GridLayout(1,3));
         upperPanel.add(new JLabel("ROUND:"));
-        roundLabel.setHorizontalAlignment(Label.RIGHT);
+        roundLabel.setHorizontalAlignment(SwingConstants.LEFT);
         upperPanel.add(roundLabel);
         DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate now = LocalDate.now();
         JLabel dateLabel = new JLabel(now.format(formatDate));
+        dateLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         upperPanel.add(dateLabel);
 
         JPanel playerXPanel = new JPanel(new GridLayout(2,1));
         JLabel playerXLabel = new JLabel(namePlayerX+ " [" + PlayerType.X + "]");
+        playerXLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        playerXLabel.setForeground(Color.RED);
         JPanel scorePlayerXPanel = new JPanel();
         scorePlayerXPanel.add(new JLabel("Score: "));
         scorePlayerXPanel.add(playerXScoreLabel);
         playerXPanel.add(playerXLabel);
         playerXPanel.add(scorePlayerXPanel);
+        playerXPanel.setBackground(Color.white);
         playerXPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
         JPanel playerOPanel = new JPanel(new GridLayout(2,1));
         JLabel playerOLabel = new JLabel(namePlayerO+ " [" + PlayerType.O + "]");
+        playerOLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        playerOLabel.setForeground(Color.blue);
         JPanel scorePlayerOPanel = new JPanel();
         scorePlayerOPanel.add(new JLabel("Score: "));
         scorePlayerOPanel.add(playerOScoreLabel);
         playerOPanel.add(playerOLabel);
         playerOPanel.add(scorePlayerOPanel);
+        playerOPanel.setBackground(Color.white);
         playerOPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
         JPanel turnPanel = new JPanel();
-        turnPanel.setAlignmentX(Panel.CENTER_ALIGNMENT);
         turnPanel.setLayout(new GridLayout(2,1));
+        turnPlayerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         turnPanel.add(turnPlayerLabel);
+        turnLabel.setHorizontalAlignment(SwingConstants.CENTER);
         turnPanel.add(turnLabel);
 
         JPanel lowerPanel = new JPanel();
@@ -137,6 +145,7 @@ public class GamePanel extends JPanel  implements IGameListener {
         SingleSquareGame button = matrix.get(x).get(y);
         button.setText(String.valueOf(player.getPlayerType().getPlayerTypeChar()));
         button.setEnabled(false);
+
     }
 
 
@@ -161,10 +170,23 @@ public class GamePanel extends JPanel  implements IGameListener {
         if(turn.getTurnPlayer() == PlayerType.X) {
             turnPlayerLabel.setText("Turn of [" + PlayerType.X + "]");
             turnLabel.setText("<=======");
+            turnLabel.setForeground(Color.RED);
         }
         else {
             turnPlayerLabel.setText("Turn of [" + PlayerType.O + "]");
             turnLabel.setText("=======>");
+            turnLabel.setForeground(Color.BLUE);
         }
+    }
+
+    @Override
+    public void scoreOPlayerChanged(int score) {
+        playerOScoreLabel.setText(String.valueOf(score));
+    }
+
+    @Override
+    public void scoreXPlayerChanged(int score) {
+        playerXScoreLabel.setText(String.valueOf(score));
+
     }
 }

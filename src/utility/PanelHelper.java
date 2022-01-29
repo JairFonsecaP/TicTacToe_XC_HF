@@ -17,6 +17,11 @@ public class PanelHelper
         return createSeparator(SmallSize, SmallSize);
     }
 
+    public static Component createCustomSeparator(int size)
+    {
+        return createSeparator(size, size);
+    }
+
     public static Component createLargeSeparator()
     {
         return createSeparator(LargeSize, LargeSize);

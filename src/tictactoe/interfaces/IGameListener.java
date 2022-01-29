@@ -8,4 +8,6 @@ public interface IGameListener {
     void restart();
     void setRound(int round);
     void setTurn(Turn turn);
+    void scoreOPlayerChanged(int score);
+    void scoreXPlayerChanged(int score);
 }
