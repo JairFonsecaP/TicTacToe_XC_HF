@@ -19,13 +19,14 @@ public class GamePanel extends JPanel  implements IGameListener {
     {
         this.size = size;
         matrix = new ArrayList<>();
-
         roundLabel = new JLabel("Round: " + round);
         JPanel gameZonePanel = createGameZonePanel();
+        JPanel informationPanel = createUpperPanel(namePlayerX,namePlayerO);
 
-        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(PanelHelper.createLargeEmptyBorder());
-        add(createUpperPanel(namePlayerX,namePlayerO));
+        add(informationPanel);
+        add(PanelHelper.createLargeSeparator());
         add(gameZonePanel);
     }
 
@@ -42,7 +43,8 @@ public class GamePanel extends JPanel  implements IGameListener {
             for (SingleSquareGame field: row )
                 gameZonePanel.add(field);
         }
-        Dimension dimension = new Dimension((size * 10) + (size* 3),(size * 10) + (size* 3));
+        int singleSize = (size * 10) + (size* 3);
+        Dimension dimension = new Dimension(singleSize,singleSize);
         gameZonePanel.setSize(dimension);
 
         return gameZonePanel;
