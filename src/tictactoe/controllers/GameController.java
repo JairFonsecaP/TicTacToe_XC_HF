@@ -21,7 +21,7 @@ public class GameController {
 
     private final GameWindow window;
 
-    private GameTextLogger gameTextLogger;
+    private final GameTextLogger gameTextLogger;
 
     public GameController(int size, String namePlayerX, String namePlayerY) {
 
