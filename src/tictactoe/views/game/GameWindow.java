@@ -10,7 +10,7 @@ public class GameWindow extends JFrame {
         setContentPane(contentPane);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setResizable(false);
+        //setResizable(false);
         pack();
     }
 }

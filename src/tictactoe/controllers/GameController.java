@@ -25,9 +25,9 @@ public class GameController {
         GameWindow window = new GameWindow("Tic Tac Toe Game", view);
         window.setVisible(true);
         model.addListener(view);
+        view.setTurn(model.getTurn());
         view.addButtonsListener((ActionEvent e) -> onButtonClicked(e));
     }
-
 
     private void onButtonClicked(ActionEvent e) {
 

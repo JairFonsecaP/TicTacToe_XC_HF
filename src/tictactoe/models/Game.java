@@ -4,7 +4,7 @@ import tictactoe.interfaces.IGameListener;
 
 import java.util.ArrayList;
 //TODO The game saves each move to a log file.
-//TODO Cerrar el juego: cuando el juego termine escribir en los archivos .data de cada jugador
+// TODO Cerrar el juego: cuando el juego termine escribir en los archivos .data de cada jugador
 public class Game {
 
     private static final int PlayerX = 1;
@@ -171,7 +171,7 @@ public class Game {
         if (canPlay(x, y))
             rows.get(x).set(y, player.getPlayerType() == PlayerType.X ? PlayerX : PlayerY);
         turn.changeTurn();
-        incrementRound();
+        //incrementRound();
         for (IGameListener listener : listeners) {
             listener.buttonClicked(x, y, player);
             listener.setTurn(turn);

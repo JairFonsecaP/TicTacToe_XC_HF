@@ -16,14 +16,20 @@ public class GamePanel extends JPanel  implements IGameListener {
 
     private JLabel roundLabel;
     private JLabel turnLabel;
+    private JLabel turnPlayerLabel;
+    private JLabel playerXScoreLabel;
+    private JLabel playerOScoreLabel;
     private final int size;
     private final ArrayList<ArrayList<SingleSquareGame>> matrix;
     public GamePanel(int size, int round,String namePlayerX, String namePlayerO)
     {
         this.size = size;
         matrix = new ArrayList<>();
-        roundLabel = new JLabel("Round: " + round);
+        roundLabel = new JLabel(String.valueOf(round));
         turnLabel = new JLabel();
+        turnPlayerLabel = new JLabel();
+        playerXScoreLabel = new JLabel("0");
+        playerOScoreLabel = new JLabel("0");
         JPanel gameZonePanel = createGameZonePanel();
         JPanel informationPanel = createUpperPanel(namePlayerX,namePlayerO);
 
@@ -64,27 +70,51 @@ public class GamePanel extends JPanel  implements IGameListener {
     }
 
     private JPanel createUpperPanel(String namePlayerX, String namePlayerO){
-        JPanel panel = new JPanel();
-        JPanel upperPanel = new JPanel();
-        JPanel lowerPanel = new JPanel();
-        LocalDate now = LocalDate.now();
-        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-        JLabel dateLabel = new JLabel(now.format(formatDate));
+        JPanel upperPanel = new JPanel();
+        upperPanel.setLayout(new GridLayout(1,3));
+        upperPanel.add(new JLabel("ROUND:"));
+        roundLabel.setHorizontalAlignment(Label.RIGHT);
         upperPanel.add(roundLabel);
-        add(PanelHelper.createLargeSeparator());
-        setLayout(new GridLayout(2,1));
+        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate now = LocalDate.now();
+        JLabel dateLabel = new JLabel(now.format(formatDate));
         upperPanel.add(dateLabel);
 
-        JLabel playerXLabel = new JLabel(namePlayerX);
-        JLabel playerOLabel = new JLabel(namePlayerO);
+        JPanel playerXPanel = new JPanel(new GridLayout(2,1));
+        JLabel playerXLabel = new JLabel(namePlayerX+ " [" + PlayerType.X + "]");
+        JPanel scorePlayerXPanel = new JPanel();
+        scorePlayerXPanel.add(new JLabel("Score: "));
+        scorePlayerXPanel.add(playerXScoreLabel);
+        playerXPanel.add(playerXLabel);
+        playerXPanel.add(scorePlayerXPanel);
+        playerXPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
-        lowerPanel.add(playerXLabel);
-        lowerPanel.add(turnLabel);
-        lowerPanel.add(playerOLabel);
+        JPanel playerOPanel = new JPanel(new GridLayout(2,1));
+        JLabel playerOLabel = new JLabel(namePlayerO+ " [" + PlayerType.O + "]");
+        JPanel scorePlayerOPanel = new JPanel();
+        scorePlayerOPanel.add(new JLabel("Score: "));
+        scorePlayerOPanel.add(playerOScoreLabel);
+        playerOPanel.add(playerOLabel);
+        playerOPanel.add(scorePlayerOPanel);
+        playerOPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
+        JPanel turnPanel = new JPanel();
+        turnPanel.setAlignmentX(Panel.CENTER_ALIGNMENT);
+        turnPanel.setLayout(new GridLayout(2,1));
+        turnPanel.add(turnPlayerLabel);
+        turnPanel.add(turnLabel);
+
+        JPanel lowerPanel = new JPanel();
+        lowerPanel.setLayout(new BoxLayout(lowerPanel, BoxLayout.X_AXIS));
+        lowerPanel.add(playerXPanel);
+        lowerPanel.add(turnPanel);
+        lowerPanel.add(playerOPanel);
+
+        JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS));
         panel.add(upperPanel);
+        panel.add(PanelHelper.createLargeSeparator());
         panel.add(lowerPanel);
         return panel;
     }
@@ -122,15 +152,19 @@ public class GamePanel extends JPanel  implements IGameListener {
 
     @Override
     public void setRound(int round) {
-        roundLabel.setText("Round: " + round);
+        roundLabel.setText(String.valueOf(round));
     }
 
     @Override
     public void setTurn(Turn turn)
     {
-        if(turn.getTurnPlayer() == PlayerType.X)
-            turnLabel.setText("Turn of \n <-------");
-        else
-            turnLabel.setText("Turn of \n ------->");
+        if(turn.getTurnPlayer() == PlayerType.X) {
+            turnPlayerLabel.setText("Turn of [" + PlayerType.X + "]");
+            turnLabel.setText("<=======");
+        }
+        else {
+            turnPlayerLabel.setText("Turn of [" + PlayerType.O + "]");
+            turnLabel.setText("=======>");
+        }
     }
 }
