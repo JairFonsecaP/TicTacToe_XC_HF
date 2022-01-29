@@ -17,6 +17,7 @@ public class InformationPanel extends JPanel
     {
         this.game = game;
         roundLabel = new JLabel("ROUND " + game.getRound());
+        //TODO Arreglar vista: pintar turno y score
         add(createUpperPanel());
     }
 

@@ -29,6 +29,7 @@ public class GameController {
 
 
     private void onButtonClicked(ActionEvent e) {
+
         SingleSquareGame button = (SingleSquareGame) e.getSource();
         ArrayList<ArrayList<SingleSquareGame>> matrix = view.getGameZonePanel().getMatrix();
         for (int i = 0; i < matrix.size(); i++) {
@@ -38,7 +39,7 @@ public class GameController {
             }
         }
         if (model.isThereWinner()){
-            //TODO abrir nueva ventana
+
         }
     }
 }

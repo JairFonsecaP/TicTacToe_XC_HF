@@ -3,7 +3,8 @@ package tictactoe.models;
 import tictactoe.interfaces.IGameListener;
 
 import java.util.ArrayList;
-
+//TODO The game saves each move to a log file.
+//TODO Cerrar el juego: cuando el juego termine escribir en los archivos .data de cada jugador
 public class Game {
 
     private static final int PlayerX = 1;
@@ -13,8 +14,8 @@ public class Game {
     private final int id;
     private final Turn turn;
 
-    private final int scorePlayer1;
-    private final int scorePlayer2;
+    private int scorePlayerX;
+    private int scorePlayerO;
     private int round;
     private final int size;
     private final ArrayList<ArrayList> rows;
@@ -24,14 +25,14 @@ public class Game {
 
     private final Player playerX;
     private final Player playerY;
-    private Player winner;
+
 
     public Game(int size, String namePlayerX, String namePlayerY) {
         playerX = new Player(namePlayerX, PlayerType.X);
         playerY = new Player(namePlayerY, PlayerType.O);
         this.id = nextId++;
-        this.scorePlayer1 = 0;
-        this.scorePlayer2 = 0;
+        this.scorePlayerX = 0;
+        this.scorePlayerO = 0;
         this.round = 1;
         turn = new Turn();
         this.size = size;
@@ -125,12 +126,20 @@ public class Game {
         return turn;
     }
 
-    public int getScorePlayer1() {
-        return scorePlayer1;
+    public int getScorePlayerX() {
+        return scorePlayerX;
     }
 
-    public int getScorePlayer2() {
-        return scorePlayer2;
+    public int getScorePlayerO() {
+        return scorePlayerO;
+    }
+
+    public void setScorePlayerX(int scorePlayerX) {
+        this.scorePlayerX = scorePlayerX;
+    }
+
+    public void setScorePlayerO(int scorePlayerO) {
+        this.scorePlayerO = scorePlayerO;
     }
 
     public int getRound() {
@@ -153,14 +162,13 @@ public class Game {
             listener.buttonClicked(x, y);
         }
         if (isThereWinner()) {
-            System.out.println("Hay ganador");
-            //TODO abrir la ventana de ganador
-            //TODO llamar listener de playerChanged para actualizar archivo
-            //TODO: esto es cuando se gana todo el juego, no la ronda:
-            winner = (playerType == PlayerType.X ? getPlayerX() : getPlayerY());
-            winner.setNumberOfGamesWon(winner.getNumberOfGamesWon()+1);
-            playerY.setNumberOfGames(playerY.getNumberOfGames()+1);
-            playerX.setNumberOfGames(playerY.getNumberOfGames()+1);
+            if(playerType == PlayerType.X)
+                setScorePlayerX(getScorePlayerX()+1);
+            else
+                setScorePlayerO(getScorePlayerO()+1);
+            for (IGameListener listener : listeners) {
+                listener.thereIsWinner(playerType);
+            }
         }
         else
             turn.changeTurn();

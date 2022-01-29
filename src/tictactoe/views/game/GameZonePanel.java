@@ -73,4 +73,9 @@ public class GameZonePanel extends JPanel implements IGameListener {
         button.setText(String.valueOf(playerType.getPlayerTypeChar()));
         button.setEnabled(false);
     }
+
+    @Override
+    public void thereIsWinner(PlayerType player) {
+        //TODO abrir nueva ventana de ganador
+    }
 }
