@@ -1,0 +1,20 @@
+
+2022-01-30T15:28:32 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 0 | Round: 1 | Turn: X | Button clicked on coordinate: [0,0]
+2022-01-30T15:28:32 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 0 | Round: 1 | Turn: O | Button clicked on coordinate: [0,1]
+2022-01-30T15:28:33 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 0 | Round: 1 | Turn: X | Button clicked on coordinate: [1,0]
+2022-01-30T15:28:33 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 0 | Round: 1 | Turn: O | Button clicked on coordinate: [1,1]
+2022-01-30T15:28:34 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 0 | Round: 1 | Turn: X | Button clicked on coordinate: [2,1]
+2022-01-30T15:28:34 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 0 | Round: 1 | Turn: O | Button clicked on coordinate: [2,0]
+2022-01-30T15:28:35 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 0 | Round: 1 | Turn: X | Button clicked on coordinate: [2,2]
+2022-01-30T15:28:35 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 0 | Round: 1 | Turn: O | Button clicked on coordinate: [1,2]
+2022-01-30T15:28:35 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 0 | Round: 1 | Turn: X | Button clicked on coordinate: [0,2]
+2022-01-30T15:28:38 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 0 | Round: 1 | Turn: X | Game Over. There is no winner.
+2022-01-30T15:28:39 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 0 | Round: 1 | Turn: X | Round Over. Drew game: There is no winner. 
+2022-01-30T15:30:14 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 0 | Round: 1 | Turn: O | Button clicked on coordinate: [0,1]
+2022-01-30T15:30:14 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 0 | Round: 1 | Turn: X | Button clicked on coordinate: [0,0]
+2022-01-30T15:30:14 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 0 | Round: 1 | Turn: O | Button clicked on coordinate: [1,1]
+2022-01-30T15:30:15 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 0 | Round: 1 | Turn: X | Button clicked on coordinate: [1,0]
+2022-01-30T15:30:17 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 0 | Round: 1 | Turn: O | Button clicked on coordinate: [1,2]
+2022-01-30T15:30:18 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 0 | Round: 1 | Turn: X | Button clicked on coordinate: [2,0]
+2022-01-30T15:30:20 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 1 | Round: 1 | Turn: X | Game Over [Winner: XIMENA ] [Loser: JAIR]
+2022-01-30T15:30:21 | Game ID: 1 | PlayerX: JAIR – PlayerX Score: 0 | PlayerO: XIMENA – PlayerO Score: 1 | Round: 1 | Turn: X | Round Over XIMENA won.
