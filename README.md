@@ -53,6 +53,6 @@ A Java version of the Tic Tac Toe game, created by Ximena Carrillo and Jair Fons
 - The files are saved in the directory "Players/"
 #### Game Log
 - Each time a player clicks a button on the grid a new line is written on the log.
-- The file is "Log.txt" and is located in the directory "Games"
+- The file is "Log.txt" and is located in the directory "Game"
 
 If you want, you can see our code on: https://github.com/ximenacarrillo/TicTacToe_XC_HF
