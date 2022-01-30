@@ -38,12 +38,12 @@ A Java version of the Tic Tac Toe game, created by Ximena Carrillo and Jair Fons
 ### See the history of players
 - On the principal screen (first), press the "History" link.
 - A new screen will be opened. You should be able to see information about all players:
- - Player Number: Unique ID of the player
- - Player Nickname
- - Games played
- - Games won
- - Games Lost
- - Games drew
+  - Player Number: Unique ID of the player
+  - Player Nickname
+  - Games played
+  - Games won
+  - Games Lost
+  - Games drew
 
 ## Adittional Features
 ### Logs
@@ -53,6 +53,6 @@ A Java version of the Tic Tac Toe game, created by Ximena Carrillo and Jair Fons
 - The files are saved in the directory "Players/"
 #### Game Log
 - Each time a player clicks a button on the grid a new line is written on the log.
-- The file is "Log.txt" and is located in the directory "Game"
+- The file is "Log.txt" and is located in the directory "Game/"
 
 If you want, you can see our code on: https://github.com/ximenacarrillo/TicTacToe_XC_HF
