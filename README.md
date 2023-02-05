@@ -56,3 +56,8 @@ A Java version of the Tic Tac Toe game, created by Ximena Carrillo and Jair Fons
 - The file is "Log.txt" and is located in the directory "Game/"
 
 If you want, you can see our code on: https://github.com/ximenacarrillo/TicTacToe_XC_HF
+
+## Author
+
+-   [Ximena Carrillo](https://www.linkedin.com/in/ximenacarrillo/)
+-   [Hector Fonseca](https://hectorfonseca.dev)
